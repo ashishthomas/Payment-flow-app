@@ -75,7 +75,7 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-6 right-6 transform z-50 bg-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-full px-6 py-3"
+      className="fixed left-4 top-6 right-6 transform z-50 bg-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-full px-6 py-3"
     >
       <div className="grid grid-cols-3 items-center gap-4">
         {/* Logo - Left side */}

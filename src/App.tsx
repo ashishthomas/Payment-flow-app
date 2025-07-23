@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -16,6 +15,18 @@ import PlatformPage from "./pages/PlatformPage";
 import HelpPage from "./pages/HelpPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+
+import SendMoneyPage from "./pages/SendMoneyPage";
+import ReceiveMoneyPage from "./pages/ReceiveMoneyPage";
+import CardPage from "./pages/CardPage";
+import AboutPage from "./pages/AboutPage";
+import CareersPage from "./pages/CareersPage";
+import NewsPage from "./pages/NewsPage";
+import MissionPage from "./pages/MissionPage";
+import InvestorPage from "./pages/InvestorPage";
+import PrivacyPage from "./pages/PrivacyPage";
+import TermsPage from "./pages/TermsPage";
+import CookiesPage from "./pages/CookiesPage";
 
 const HomePage = () => (
   <>
@@ -42,6 +53,18 @@ function App() {
           <Route path="/help" element={<HelpPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+
+          <Route path="/send-money" element={<SendMoneyPage />} />
+          <Route path="/receive-money" element={<ReceiveMoneyPage />} />
+          <Route path="/card" element={<CardPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/careers" element={<CareersPage />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/mission" element={<MissionPage />} />
+          <Route path="/investors" element={<InvestorPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/cookies" element={<CookiesPage />} />
         </Routes>
         <Footer />
       </div>

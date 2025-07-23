@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Twitter, Facebook, Instagram, Linkedin, Globe } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Logo = () => (
   <div className="w-10 h-10">
@@ -25,27 +26,42 @@ const Logo = () => (
 const Footer = () => {
   const footerLinks = {
     "Send money": [
-      "Send money online",
-      "Send money to India",
-      "Send money to Philippines",
-      "Send money to Mexico",
-      "Send money to Pakistan",
+      { label: "Send money online", path: "/send-money" },
+      { label: "Send money to India", path: "/send-money?country=india" },
+      {
+        label: "Send money to Philippines",
+        path: "/send-money?country=philippines",
+      },
+      { label: "Send money to Mexico", path: "/send-money?country=mexico" },
+      { label: "Send money to Pakistan", path: "/send-money?country=pakistan" },
     ],
     "Receive money": [
-      "Receive money online",
-      "Get account details",
-      "Multi-currency account",
-      "Large amount transfers",
-      "International wire",
+      { label: "Receive money online", path: "/receive-money" },
+      { label: "Get account details", path: "/receive-money#account-details" },
+      {
+        label: "Multi-currency account",
+        path: "/receive-money#multi-currency",
+      },
+      {
+        label: "Large amount transfers",
+        path: "/receive-money#large-transfers",
+      },
+      { label: "International wire", path: "/receive-money#wire-transfers" },
     ],
     "FlowPay card": [
-      "Debit card",
-      "Card for travel",
-      "Card for business",
-      "ATM withdrawals",
-      "Card fees",
+      { label: "Debit card", path: "/card" },
+      { label: "Card for travel", path: "/card#travel" },
+      { label: "Card for business", path: "/card#business" },
+      { label: "ATM withdrawals", path: "/card#atm" },
+      { label: "Card fees", path: "/card#fees" },
     ],
-    Company: ["About us", "Careers", "News", "Mission", "Investor relations"],
+    Company: [
+      { label: "About us", path: "/about" },
+      { label: "Careers", path: "/careers" },
+      { label: "News", path: "/news" },
+      { label: "Mission", path: "/mission" },
+      { label: "Investor relations", path: "/investors" },
+    ],
   };
 
   return (
@@ -83,12 +99,12 @@ const Footer = () => {
               <ul className="space-y-3">
                 {links.map((link, index) => (
                   <li key={index}>
-                    <a
-                      href="#"
+                    <Link
+                      to={link.path}
                       className="text-slate-400 hover:text-white transition-colors text-sm"
                     >
-                      {link}
-                    </a>
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -104,6 +120,7 @@ const Footer = () => {
                 <select className="bg-transparent text-slate-400 text-sm focus:outline-none">
                   <option>English</option>
                   <option>Español</option>
+                  <option> Hindi </option>
                   <option>Français</option>
                 </select>
               </div>
@@ -111,15 +128,21 @@ const Footer = () => {
             </div>
 
             <div className="flex items-center space-x-6 text-slate-400 text-sm">
-              <a href="#" className="hover:text-white transition-colors">
+              <Link
+                to="/privacy"
+                className="hover:text-white transition-colors"
+              >
                 Privacy policy
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
+              </Link>
+              <Link to="/terms" className="hover:text-white transition-colors">
                 Terms of use
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
+              </Link>
+              <Link
+                to="/cookies"
+                className="hover:text-white transition-colors"
+              >
                 Cookies
-              </a>
+              </Link>
             </div>
           </div>
         </div>
