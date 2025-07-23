@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Smartphone, Download, QrCode } from "lucide-react";
 
@@ -145,14 +146,16 @@ const CallToAction = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-lime-400 text-slate-900 px-12 py-6 rounded-full text-xl font-semibold hover:bg-lime-300 transition-colors inline-flex items-center space-x-3"
-          >
-            <Download size={24} />
-            <span>Start your journey today</span>
-          </motion.button>
+          <Link to="/register">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-lime-400 text-slate-900 px-12 py-6 rounded-full text-xl font-semibold hover:bg-lime-300 transition-colors inline-flex items-center space-x-3"
+            >
+              <Download size={24} />
+              <span>Start your journey today</span>
+            </motion.button>
+          </Link>
 
           <div className="mt-6 text-slate-400">
             No setup fees • No monthly fees • No minimum balance

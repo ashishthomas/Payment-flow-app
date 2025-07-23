@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -31,9 +32,11 @@ const Logo = () => (
   </div>
 );
 
-// ✅ Navbar component
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const location = useLocation();
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <motion.nav
@@ -44,47 +47,69 @@ const Navbar = () => {
       <div className="grid grid-cols-3 items-center gap-4">
         {/* Logo - Left side */}
         <div className="flex items-center space-x-3 justify-self-start">
-          <Logo />
-          <span className="text-white font-semibold text-lg">FlowPay</span>
+          <Link to="/" className="flex items-center space-x-3">
+            <Logo />
+            <span className="text-white font-semibold text-lg">FlowPay</span>
+          </Link>
         </div>
 
         {/* Navigation Menu - Center */}
         <div className="hidden md:flex items-center space-x-8 justify-self-center">
-          <a
-            href="#"
-            className="text-slate-300 hover:text-white transition-colors text-sm"
+          <Link
+            to="/personal"
+            className={`transition-colors text-sm ${
+              isActive("/personal")
+                ? "text-lime-400"
+                : "text-slate-300 hover:text-white"
+            }`}
           >
             Personal
-          </a>
-          <a
-            href="#"
-            className="text-slate-300 hover:text-white transition-colors text-sm"
+          </Link>
+          <Link
+            to="/business"
+            className={`transition-colors text-sm ${
+              isActive("/business")
+                ? "text-lime-400"
+                : "text-slate-300 hover:text-white"
+            }`}
           >
             Business
-          </a>
-          <a
-            href="#"
-            className="text-slate-300 hover:text-white transition-colors text-sm"
+          </Link>
+          <Link
+            to="/platform"
+            className={`transition-colors text-sm ${
+              isActive("/platform")
+                ? "text-lime-400"
+                : "text-slate-300 hover:text-white"
+            }`}
           >
             Platform
-          </a>
-          <a
-            href="#"
-            className="text-slate-300 hover:text-white transition-colors text-sm"
+          </Link>
+          <Link
+            to="/help"
+            className={`transition-colors text-sm ${
+              isActive("/help")
+                ? "text-lime-400"
+                : "text-slate-300 hover:text-white"
+            }`}
           >
             Help
-          </a>
+          </Link>
         </div>
 
         {/* Auth buttons - Right side */}
         <div className="hidden md:flex items-center space-x-4 justify-self-end">
-          <button className="text-slate-300 hover:text-white transition-colors text-sm whitespace-nowrap">
+          <Link
+            to="/login"
+            className="text-slate-300 hover:text-white transition-colors text-sm whitespace-nowrap"
+          >
             Log in
-          </button>
+          </Link>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-lime-400 text-slate-900 px-4 py-2 rounded-full text-sm font-medium hover:bg-lime-300 transition-colors whitespace-nowrap"
+            onClick={() => (window.location.href = "/register")}
           >
             Register
           </motion.button>
@@ -92,11 +117,67 @@ const Navbar = () => {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden text-white justify-self-end"
+          className="md:hidden text-white absolute right-6 top-6"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 right-0 mt-2 bg-slate-800/95 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 md:hidden"
+          >
+            <div className="flex flex-col space-y-4">
+              <Link
+                to="/personal"
+                className="text-slate-300 hover:text-white transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Personal
+              </Link>
+              <Link
+                to="/business"
+                className="text-slate-300 hover:text-white transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Business
+              </Link>
+              <Link
+                to="/platform"
+                className="text-slate-300 hover:text-white transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Platform
+              </Link>
+              <Link
+                to="/help"
+                className="text-slate-300 hover:text-white transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Help
+              </Link>
+              <hr className="border-slate-700" />
+              <Link
+                to="/login"
+                className="text-slate-300 hover:text-white transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Log in
+              </Link>
+              <Link
+                to="/register"
+                className="bg-lime-400 text-slate-900 px-4 py-2 rounded-full text-center font-medium hover:bg-lime-300 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Register
+              </Link>
+            </div>
+          </motion.div>
+        )}
       </div>
     </motion.nav>
   );

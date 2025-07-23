@@ -25,7 +25,7 @@ const securityFeatures = [
 
 const SecuritySection = () => {
   return (
-    <section className="py-32 bg-slate-900">
+    <section id="how-it-works" className="py-32 bg-slate-900">
       <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

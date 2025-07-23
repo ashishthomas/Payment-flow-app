@@ -107,7 +107,7 @@ const Footer = () => {
                   <option>Français</option>
                 </select>
               </div>
-              <div className="text-slate-400 text-sm">© 2024 FlowPay</div>
+              <div className="text-slate-400 text-sm">© 2025 FlowPay</div>
             </div>
 
             <div className="flex items-center space-x-6 text-slate-400 text-sm">

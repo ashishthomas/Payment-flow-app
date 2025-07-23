@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { TrendingUp, ArrowUpRight } from "lucide-react";
 
@@ -113,9 +114,11 @@ const CurrencyDashboard = () => {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="text-center mt-16"
         >
-          <button className="bg-lime-400 text-slate-900 px-8 py-4 rounded-full text-lg font-medium hover:bg-lime-300 transition-colors">
-            Open multi-currency account
-          </button>
+          <Link to="/register">
+            <button className="bg-lime-400 text-slate-900 px-8 py-4 rounded-full text-lg font-medium hover:bg-lime-300 transition-colors">
+              Open multi-currency account
+            </button>
+          </Link>
         </motion.div>
       </div>
     </section>
