@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import { Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { authUtils } from "../utils/auth";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -11,13 +14,33 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
     setIsLoading(true);
 
-    // Simulate login process
-    setTimeout(() => {
+    try {
+      const result = authUtils.login({ email, password });
+
+      if (result.success && result.user) {
+        toast.success(result.message);
+
+        // Redirect to home page after a short delay
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("Login failed. Please try again.");
+    } finally {
       setIsLoading(false);
-      alert("Login functionality would be implemented here");
-    }, 2000);
+    }
   };
 
   return (
@@ -56,6 +79,7 @@ const LoginPage = () => {
                   className="w-full bg-slate-700 text-white pl-12 pr-4 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
                   placeholder="Enter your email"
                   required
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -76,11 +100,13 @@ const LoginPage = () => {
                   className="w-full bg-slate-700 text-white pl-12 pr-12 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
                   placeholder="Enter your password"
                   required
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white disabled:opacity-50"
+                  disabled={isLoading}
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
@@ -92,6 +118,7 @@ const LoginPage = () => {
                 <input
                   type="checkbox"
                   className="w-4 h-4 text-lime-400 bg-slate-700 border-slate-600 rounded focus:ring-lime-400"
+                  disabled={isLoading}
                 />
                 <span className="text-slate-400 text-sm">Remember me</span>
               </label>
@@ -99,10 +126,9 @@ const LoginPage = () => {
                 type="button"
                 className="text-lime-400 text-sm hover:text-lime-300"
                 onClick={() =>
-                  alert(
-                    "Password reset functionality would be implemented here"
-                  )
+                  toast("Password reset functionality coming soon!")
                 }
+                disabled={isLoading}
               >
                 Forgot password?
               </button>
@@ -116,7 +142,10 @@ const LoginPage = () => {
               className="w-full bg-lime-400 text-slate-900 py-3 rounded-xl font-semibold hover:bg-lime-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
             >
               {isLoading ? (
-                <div className="w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" />
+                <>
+                  <div className="w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" />
+                  <span>Signing in...</span>
+                </>
               ) : (
                 <>
                   <span>Sign in</span>

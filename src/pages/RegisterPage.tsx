@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import {
   Mail,
   Lock,
@@ -10,8 +11,10 @@ import {
   ArrowRight,
   CheckCircle,
 } from "lucide-react";
+import { authUtils } from "../utils/auth";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -26,22 +29,60 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validation
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
     if (!agreedToTerms) {
-      alert("Please agree to the terms and conditions");
+      toast.error("Please agree to the terms and conditions");
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
       return;
     }
 
     setIsLoading(true);
 
-    // Simulate registration process
-    setTimeout(() => {
+    try {
+      // Register user
+      const result = authUtils.register({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (result.success && result.user) {
+        // Auto-login after successful registration
+        const loginResult = authUtils.login({
+          email: formData.email,
+          password: formData.password,
+        });
+
+        if (loginResult.success) {
+          toast.success(`Welcome to FlowPay, ${result.user.firstName}! 🎉`);
+
+          // Redirect to home page after a short delay
+          setTimeout(() => {
+            navigate("/");
+          }, 1500);
+        } else {
+          toast.success("Registration successful! Please log in.");
+          navigate("/login");
+        }
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      toast.error("Registration failed. Please try again.");
+    } finally {
       setIsLoading(false);
-      alert("Registration functionality would be implemented here");
-    }, 2000);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -144,6 +185,7 @@ const RegisterPage = () => {
                   className="w-full bg-slate-700 text-white px-4 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
                   placeholder="Last name"
                   required
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -165,6 +207,7 @@ const RegisterPage = () => {
                   className="w-full bg-slate-700 text-white pl-12 pr-4 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
                   placeholder="Enter your email"
                   required
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -185,15 +228,21 @@ const RegisterPage = () => {
                   onChange={handleInputChange}
                   className="w-full bg-slate-700 text-white pl-12 pr-12 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
                   placeholder="Create a password"
+                  minLength={6}
                   required
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white disabled:opacity-50"
+                  disabled={isLoading}
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
+              </div>
+              <div className="text-xs text-slate-500 mt-1">
+                Password must be at least 6 characters long
               </div>
             </div>
 
@@ -214,11 +263,13 @@ const RegisterPage = () => {
                   className="w-full bg-slate-700 text-white pl-12 pr-12 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
                   placeholder="Confirm your password"
                   required
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white disabled:opacity-50"
+                  disabled={isLoading}
                 >
                   {showConfirmPassword ? (
                     <EyeOff size={20} />
@@ -236,6 +287,7 @@ const RegisterPage = () => {
                 checked={agreedToTerms}
                 onChange={(e) => setAgreedToTerms(e.target.checked)}
                 className="w-4 h-4 text-lime-400 bg-slate-700 border-slate-600 rounded focus:ring-lime-400 mt-1"
+                disabled={isLoading}
               />
               <label
                 htmlFor="terms"
@@ -266,7 +318,10 @@ const RegisterPage = () => {
               className="w-full bg-lime-400 text-slate-900 py-3 rounded-xl font-semibold hover:bg-lime-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
             >
               {isLoading ? (
-                <div className="w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" />
+                <>
+                  <div className="w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" />
+                  <span>Creating account...</span>
+                </>
               ) : (
                 <>
                   <span>Create account</span>

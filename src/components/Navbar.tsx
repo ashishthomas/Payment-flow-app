@@ -1,7 +1,9 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut, User as UserIcon } from "lucide-react";
+import toast from "react-hot-toast";
+import { authUtils } from "../utils/auth";
 
 // ✅ Fixed Logo component using dangerouslySetInnerHTML
 const Logo = () => (
@@ -35,9 +37,40 @@ const Logo = () => (
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const location = useLocation();
+  const [currentUser, setCurrentUser] = React.useState(
+    authUtils.getCurrentUser()
+  );
+
+  // Update current user state when localStorage changes
+  React.useEffect(() => {
+    const handleStorageChange = () => {
+      setCurrentUser(authUtils.getCurrentUser());
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    // Also check periodically for changes within the same tab
+    const interval = setInterval(() => {
+      const user = authUtils.getCurrentUser();
+      if (JSON.stringify(user) !== JSON.stringify(currentUser)) {
+        setCurrentUser(user);
+      }
+    }, 1000);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
+    };
+  }, [currentUser]);
 
   const isActive = (path: string) => location.pathname === path;
 
+  const handleLogout = () => {
+    authUtils.logout();
+    setCurrentUser(null);
+    toast.success("Logged out successfully");
+    setIsOpen(false);
+  };
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -98,26 +131,46 @@ const Navbar = () => {
         </div>
 
         {/* Auth buttons - Right side */}
-        <div className="hidden md:flex items-center space-x-4 justify-self-end">
-          <Link
-            to="/login"
-            className="text-slate-300 hover:text-white transition-colors text-sm whitespace-nowrap"
-          >
-            Log in
-          </Link>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-lime-400 text-slate-900 px-4 py-2 rounded-full text-sm font-medium hover:bg-lime-300 transition-colors whitespace-nowrap"
-            onClick={() => (window.location.href = "/register")}
-          >
-            Register
-          </motion.button>
-        </div>
+        {currentUser ? (
+          <div className="hidden md:flex items-center space-x-4 justify-self-end">
+            <div className="flex items-center space-x-2 text-slate-300">
+              <UserIcon size={16} />
+              <span className="text-sm">
+                {currentUser.firstName} {currentUser.lastName}
+              </span>
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleLogout}
+              className="flex items-center space-x-2 bg-slate-700 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-slate-600 transition-colors whitespace-nowrap"
+            >
+              <LogOut size={16} />
+              <span>Logout</span>
+            </motion.button>
+          </div>
+        ) : (
+          <div className="hidden md:flex items-center space-x-4 justify-self-end">
+            <Link
+              to="/login"
+              className="text-slate-300 hover:text-white transition-colors text-sm whitespace-nowrap"
+            >
+              Log in
+            </Link>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-lime-400 text-slate-900 px-4 py-2 rounded-full text-sm font-medium hover:bg-lime-300 transition-colors whitespace-nowrap"
+              onClick={() => (window.location.href = "/register")}
+            >
+              Register
+            </motion.button>
+          </div>
+        )}
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden text-white absolute right-6 top-6"
+          className="md:hidden text-white absolute top-6 right-6"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -161,20 +214,40 @@ const Navbar = () => {
                 Help
               </Link>
               <hr className="border-slate-700" />
-              <Link
-                to="/login"
-                className="text-slate-300 hover:text-white transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Log in
-              </Link>
-              <Link
-                to="/register"
-                className="bg-lime-400 text-slate-900 px-4 py-2 rounded-full text-center font-medium hover:bg-lime-300 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Register
-              </Link>
+              {currentUser ? (
+                <>
+                  <div className="flex items-center space-x-2 text-slate-300">
+                    <UserIcon size={16} />
+                    <span className="text-sm">
+                      {currentUser.firstName} {currentUser.lastName}
+                    </span>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="flex items-center space-x-2 bg-slate-700 text-white px-4 py-2 rounded-full text-center font-medium hover:bg-slate-600 transition-colors"
+                  >
+                    <LogOut size={16} />
+                    <span>Logout</span>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="text-slate-300 hover:text-white transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Log in
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="bg-lime-400 text-slate-900 px-4 py-2 rounded-full text-center font-medium hover:bg-lime-300 transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
         )}
