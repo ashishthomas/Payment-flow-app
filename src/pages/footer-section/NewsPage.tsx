@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Calendar, User, ArrowRight, Search, Tag } from "lucide-react";
 
@@ -39,7 +39,7 @@ const NewsPage = () => {
         "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800",
       readTime: "5 min read",
     },
-    {   
+    {
       id: 3,
       title: "The Future of Cross-Border Payments: 2024 Trends",
       category: "Industry Insights",

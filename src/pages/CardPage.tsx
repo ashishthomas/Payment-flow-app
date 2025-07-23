@@ -6,8 +6,6 @@ import {
   Plane,
   Building2,
   MapPin,
-  DollarSign,
-  Shield,
   ArrowRight,
   CheckCircle,
 } from "lucide-react";

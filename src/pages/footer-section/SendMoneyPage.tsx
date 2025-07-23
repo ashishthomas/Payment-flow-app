@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link, useSearchParams } from "react-router-dom";
-import {
-  Send,
-  Globe,
-  Clock,
-  Shield,
-  Calculator,
-  ArrowRight,
-  CheckCircle,
-} from "lucide-react";
+import { Send, Clock, Shield, Calculator, ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
 
 const SendMoneyPage = () => {

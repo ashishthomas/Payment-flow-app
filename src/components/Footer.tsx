@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { Twitter, Facebook, Instagram, Linkedin, Globe } from "lucide-react";
 import { Link } from "react-router-dom";

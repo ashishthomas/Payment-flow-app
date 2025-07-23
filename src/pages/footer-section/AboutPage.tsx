@@ -1,16 +1,6 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import {
-  Users,
-  Globe,
-  Award,
-  Heart,
-  ArrowRight,
-  Target,
-  Eye,
-  Zap,
-} from "lucide-react";
+import { Users, Heart, ArrowRight, Target, Eye, Zap } from "lucide-react";
 
 const AboutPage = () => {
   const stats = [
