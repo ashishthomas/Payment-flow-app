@@ -1,69 +1,147 @@
-# React + TypeScript + Vite
+# 💸 FlowPay – Modern Payment App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An end-to-end payment platform web application built using **React**, **TypeScript**, **Tailwind CSS**, and **Vite**. FlowPay enables users to manage money, send and receive international payments, and access multi-currency accounts with a beautiful, responsive UI. Inspired by leading fintech apps, this project demonstrates modern design, smooth navigation, and real-world payment features.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<div align="center">
+  <br />
+  <a href="https://youtu.be/YOUR_VIDEO_ID" target="_blank">
+   <img src="./public/FlowPay-Payment-Application.png" alt="Portfolio Website Banner"> 
+  </a>
+  <br />
+  <div>
+    <img src="https://img.shields.io/badge/-React-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React" />
+    <img src="https://img.shields.io/badge/-TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/-TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/-Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+    <img src="https://img.shields.io/badge/-Lucide Icons-FD4D4D?style=for-the-badge&logo=lucide" alt="Lucide Icons" />
+  </div>
+  <h3 align="center"> Modern Payment App built with React, TypeScript, Tailwind CSS, and Vite </h3>
+  <br />
+</div>
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📌 Table of Contents
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- [Features](#-features)
+- [Screenshots](#-screenshots)
+- [Tech Stack](#-tech-stack)
+- [Folder Structure](#-folder-structure)
+- [Getting Started](#-getting-started)
+- [Available Scripts](#-available-scripts)
+- [Deployment](#-deployment)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Author](#-author)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 Features
+
+### For Users:
+
+- 💸 Send and receive money internationally
+- 🌍 Multi-currency account and debit card support
+- 🔍 Transparent exchange rates, no hidden fees
+- 📱 Downloadable app for iOS and Android
+- 🛡️ 24/7 customer support
+- 📊 Dashboard for currency and transaction management
+
+### General:
+
+- ⚡ Fast, fair, and secure money transfers
+- 🧩 Modular, component-based UI
+- 📱 Fully responsive design for all devices
+- 🌗 Light/Dark mode ready (customizable)
+- 🖼️ Animated UI with Framer Motion and Lucide icons
+
+---
+
+## 🖼️ Screenshots
+
+> _ Coming Soon_
+
+---
+
+## 🛠️ Tech Stack
+
+| Tech             | Purpose                         |
+| ---------------- | ------------------------------- |
+| React            | Front-end framework             |
+| TypeScript       | Type safety and maintainability |
+| Vite             | Fast bundler and dev server     |
+| Tailwind CSS     | Utility-first CSS styling       |
+| React Router DOM | Routing and navigation          |
+| Lucide-React     | Modern icons                    |
+| Framer Motion    | Animations                      |
+
+---
+
+## 🏁 Getting Started
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/ashishthomas/Payment-flow-app.git
+   cd Payment-App
+
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Open in browser**
+
+   Visit http://localhost:5173
+
+---
+
+## 🚀 Available Scripts
+
+```bash
+npm run dev – Start development server
+npm run build – Build for production
+npm run preview – Preview production build
+npm run lint – Run ESLint
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🤝 Contributing
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Contributions, issues, and feature requests are welcome! Feel free to check issues page.
+
+---
+
+## 📝 License
+
+This project is MIT licensed.
+
+Copyright (c) 2025 Ashish Thomas
+
+---
+
+## 🙋‍ Author
+
+- [Ashish Thomas](https://github.com/ashishthomas)
+
+---
+
+## 🔗 Useful Links
+
+- [React Documentation](https://reactjs.org/)
+- [Tailwind CSS Docs](https://tailwindcss.com/)
+- [Lucide Icons](https://lucide.dev/)
+- [Vite](https://vitejs.dev/)
+- [Vercel](https://vercel.com/)
