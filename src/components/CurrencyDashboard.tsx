@@ -66,7 +66,9 @@ const CurrencyDashboard = () => {
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
-                  <span className="text-3xl">{currency.flag}</span>
+                  <span className="text-3xl text-gray-400">
+                    {currency.flag}
+                  </span>
                   <div>
                     <div className="text-white font-semibold">
                       {currency.code}

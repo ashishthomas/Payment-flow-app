@@ -113,21 +113,27 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-slate-800 pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="flex items-center space-x-6 mb-4 md:mb-0">
+          <div className="flex flex-col gap-6 sm:gap-4 md:flex-row md:items-center md:justify-between">
+            {/* Left Section (Centered on Mobile) */}
+            <div className="flex flex-col items-center text-center sm:flex-row sm:items-center sm:justify-start sm:space-x-6 space-y-2 sm:space-y-0">
               <div className="flex items-center space-x-2 text-slate-400">
                 <Globe size={16} />
                 <select className="bg-transparent text-slate-400 text-sm focus:outline-none">
                   <option>English</option>
                   <option>Español</option>
-                  <option> Hindi </option>
+                  <option>Hindi</option>
                   <option>Français</option>
                 </select>
               </div>
+
               <div className="text-slate-400 text-sm">© 2025 FlowPay</div>
+              <div className="text-slate-400 text-sm">
+                Developed by Ashish Thomas
+              </div>
             </div>
 
-            <div className="flex items-center space-x-6 text-slate-400 text-sm">
+            {/* Right Section (Footer Links) */}
+            <div className="flex flex-wrap justify-center md:justify-end items-center gap-x-6 gap-y-2 text-slate-400 text-sm">
               <Link
                 to="/privacy"
                 className="hover:text-white transition-colors"

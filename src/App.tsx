@@ -16,17 +16,17 @@ import HelpPage from "./pages/HelpPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
-import SendMoneyPage from "./pages/SendMoneyPage";
-import ReceiveMoneyPage from "./pages/ReceiveMoneyPage";
+import SendMoneyPage from "./pages/footer-section/SendMoneyPage";
+import ReceiveMoneyPage from "./pages/footer-section/ReceiveMoneyPage";
 import CardPage from "./pages/CardPage";
-import AboutPage from "./pages/AboutPage";
-import CareersPage from "./pages/CareersPage";
-import NewsPage from "./pages/NewsPage";
-import MissionPage from "./pages/MissionPage";
-import InvestorPage from "./pages/InvestorPage";
-import PrivacyPage from "./pages/PrivacyPage";
-import TermsPage from "./pages/TermsPage";
-import CookiesPage from "./pages/CookiesPage";
+import AboutPage from "./pages/footer-section/AboutPage";
+import CareersPage from "./pages/footer-section/CareersPage";
+import NewsPage from "./pages/footer-section/NewsPage";
+import MissionPage from "./pages/footer-section/MissionPage";
+import InvestorPage from "./pages/footer-section/InvestorPage";
+import PrivacyPage from "./pages/footer-section/PrivacyPage";
+import TermsPage from "./pages/footer-section/TermsPage";
+import CookiesPage from "./pages/footer-section/CookiesPage";
 
 const HomePage = () => (
   <>

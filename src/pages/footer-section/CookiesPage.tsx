@@ -256,16 +256,16 @@ We regularly update our cookie policy to reflect changes in laws and regulations
 
   return (
     <div className="pt-32 pb-16">
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center space-x-3 mb-6">
+          <div className="inline-flex flex-wrap justify-center items-center gap-3 mb-6">
             <Cookie className="text-lime-400" size={48} />
-            <h1 className="text-5xl md:text-6xl font-light text-white">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white text-center">
               Cookie Policy
             </h1>
           </div>
@@ -307,7 +307,7 @@ We regularly update our cookie policy to reflect changes in laws and regulations
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="bg-slate-700/50 rounded-2xl p-6"
                 >
-                  <div className="flex items-start justify-between mb-4">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-lime-400/10 border border-lime-400/30 rounded-xl flex items-center justify-center">
                         <type.icon className="text-lime-400" size={24} />
@@ -354,7 +354,7 @@ We regularly update our cookie policy to reflect changes in laws and regulations
 
                   <div className="ml-16">
                     <h4 className="text-white font-medium mb-2">Examples:</h4>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mt-2">
                       {type.examples.map((example, idx) => (
                         <span
                           key={idx}
@@ -398,7 +398,7 @@ We regularly update our cookie policy to reflect changes in laws and regulations
               className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl overflow-hidden"
             >
               <button
-                className="w-full px-8 py-6 text-left flex items-center justify-between hover:bg-slate-800/70 transition-colors"
+                className="w-full px-4 sm:px-8 py-6 text-left flex flex-wrap items-center justify-between gap-3 hover:bg-slate-800/70 transition-colors"
                 onClick={() => toggleSection(index)}
               >
                 <div className="flex items-center space-x-4">
@@ -420,7 +420,7 @@ We regularly update our cookie policy to reflect changes in laws and regulations
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="px-8 pb-6"
+                  className="px-4 sm:px-8 pb-6"
                 >
                   <div className="text-slate-300 leading-relaxed whitespace-pre-line">
                     {section.content}
@@ -436,7 +436,7 @@ We regularly update our cookie policy to reflect changes in laws and regulations
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="bg-gradient-to-br from-lime-400/10 to-emerald-400/10 border border-lime-400/30 rounded-3xl p-12 text-center mt-16"
+          className="bg-gradient-to-br from-lime-400/10 to-emerald-400/10 border border-lime-400/30 rounded-3xl p-6 sm:p-10 text-center mt-16"
         >
           <h2 className="text-3xl font-semibold text-white mb-6">
             Questions About Cookies?

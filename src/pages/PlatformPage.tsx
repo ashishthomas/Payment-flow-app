@@ -190,7 +190,9 @@ console.log('Payment created:', payment.id);`;
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="border border-slate-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-slate-800 transition-colors inline-flex items-center space-x-3"
-              onClick={() => window.open("https://docs.flowpay.com", "_blank")}
+              onClick={() =>
+                window.open("https://yourapp.com/lander", "_blank")
+              }
             >
               <span>View docs</span>
               <ExternalLink size={20} />

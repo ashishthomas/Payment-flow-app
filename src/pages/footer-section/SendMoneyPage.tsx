@@ -234,7 +234,9 @@ const SendMoneyPage = () => {
                   }}
                 >
                   <div className="flex items-center space-x-3 mb-2">
-                    <span className="text-2xl">{country.flag}</span>
+                    <span className="text-2xl text-gray-400">
+                      {country.flag}
+                    </span>
                     <div>
                       <div className="text-white font-semibold">
                         {country.name}

@@ -81,7 +81,7 @@ const TransactionJourney = () => {
                     <span className="text-slate-400 text-sm">
                       {step.location}
                     </span>
-                    <span className="text-2xl">{step.flag}</span>
+                    <span className="text-2xl text-gray-400">{step.flag}</span>
                   </div>
 
                   <h3 className="text-xl font-semibold text-white mb-2">
