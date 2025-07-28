@@ -165,6 +165,36 @@ const CareersPage = () => {
         "Security best practices",
       ],
     },
+    {
+      id: 9,
+      title: "Frontend Engineer",
+      department: "Engineering",
+      location: "Onsite / Bengaluru",
+      type: "Full-time",
+      description:
+        "Build and maintain the user interface for our core money transfer platform.",
+      requirements: [
+        "React/Node.js",
+        "UI/UX design",
+        "Agile development",
+        "Financial products experience",
+      ],
+    },
+    {
+      id: 10,
+      title: "Backend Engineer",
+      department: "Engineering",
+      location: "Onsite / Bengaluru",
+      type: "Full-time",
+      description:
+        "Develop the backend systems that power our international money transfer services.",
+      requirements: [
+        "Node.js/Java/Python",
+        "Microservices architecture",
+        "Database management",
+        "Financial services experience",
+      ],
+    },
   ];
 
   const departments = [
