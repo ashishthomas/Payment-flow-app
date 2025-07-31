@@ -154,7 +154,7 @@ If your account is suspended:
 • We will investigate the reason for suspension and may request additional information
 
 If your account is terminated:
-• You will lose access to all FlowPay services
+• You will lose access to all FlowPay services and funds
 • We will return your funds according to applicable law and our policies
 • Some funds may be held for regulatory or legal reasons
 
