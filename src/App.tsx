@@ -14,6 +14,7 @@ import BusinessPage from "./pages/BusinessPage";
 import PlatformPage from "./pages/PlatformPage";
 import HelpPage from "./pages/HelpPage";
 import LoginPage from "./pages/LoginPage";
+import ForgotPasswordPage from "./pages/ForgotPassword";
 import RegisterPage from "./pages/RegisterPage";
 
 import SendMoneyPage from "./pages/footer-section/SendMoneyPage";
@@ -53,6 +54,7 @@ function App() {
           <Route path="/platform" element={<PlatformPage />} />
           <Route path="/help" element={<HelpPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/chat" element={<ChatPage />} />
 

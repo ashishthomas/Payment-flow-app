@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -139,10 +139,8 @@ const LoginPage = () => {
                 </label>
                 <button
                   type="button"
+                  onClick={() => navigate("/forgot-password")}
                   className="text-lime-400 text-sm hover:text-lime-300"
-                  onClick={() =>
-                    toast("Password reset functionality coming soon!")
-                  }
                   disabled={isLoading}
                 >
                   Forgot password?
