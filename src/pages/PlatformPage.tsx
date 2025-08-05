@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+
 import {
   Code,
   Layers,
@@ -199,7 +199,7 @@ console.log('Payment created:', payment.id);`;
               <span>View Docs</span>
               <ExternalLink size={20} />
             </motion.button>
-          </div>     
+          </div>
         </motion.div>
       </div>
     </div>

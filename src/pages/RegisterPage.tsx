@@ -11,86 +11,15 @@ import {
   ArrowRight,
   CheckCircle,
 } from "lucide-react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { authUtils } from "../utils/auth";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [agreedToTerms, setAgreedToTerms] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Validation
-    if (formData.password !== formData.confirmPassword) {
-      toast.error("Passwords do not match");
-      return;
-    }
-    if (!agreedToTerms) {
-      toast.error("Please agree to the terms and conditions");
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      toast.error("Password must be at least 6 characters long");
-      return;
-    }
-
-    setIsLoading(true);
-
-    try {
-      // Register user
-      const result = authUtils.register({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        password: formData.password,
-      });
-
-      if (result.success && result.user) {
-        // Auto-login after successful registration
-        const loginResult = authUtils.login({
-          email: formData.email,
-          password: formData.password,
-        });
-
-        if (loginResult.success) {
-          toast.success(`Welcome to FlowPay, ${result.user.firstName}! 🎉`);
-
-          // Redirect to home page after a short delay
-          setTimeout(() => {
-            navigate("/");
-          }, 1500);
-        } else {
-          toast.success("Registration successful! Please log in.");
-          navigate("/login");
-        }
-      } else {
-        toast.error(result.message);
-      }
-    } catch (error) {
-      console.error("Registration error:", error);
-      toast.error("Registration failed. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   const benefits = [
     "Multi-currency account with real exchange rates",
@@ -99,10 +28,70 @@ const RegisterPage = () => {
     "No monthly fees or minimum balance",
   ];
 
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      agreedToTerms: false,
+    },
+    validationSchema: Yup.object({
+      firstName: Yup.string().required("First name is required"),
+      lastName: Yup.string().required("Last name is required"),
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      password: Yup.string()
+        .min(6, "Password must be at least 6 characters")
+        .required("Password is required"),
+      confirmPassword: Yup.string()
+        .oneOf([Yup.ref("password")], "Passwords must match")
+        .required("Confirm your password"),
+      agreedToTerms: Yup.boolean().oneOf([true], "You must agree to the terms"),
+    }),
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      try {
+        const result = authUtils.register({
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          password: values.password,
+        });
+
+        if (result.success && result.user) {
+          const loginResult = authUtils.login({
+            email: values.email,
+            password: values.password,
+          });
+
+          if (loginResult.success) {
+            toast.success(`Welcome to FlowPay, ${result.user.firstName}! 🎉`);
+            setTimeout(() => {
+              navigate("/");
+            }, 1500);
+          } else {
+            toast.success("Registration successful! Please log in.");
+            navigate("/login");
+          }
+        } else {
+          toast.error(result.message);
+        }
+      } catch (err) {
+        console.error(err);
+        toast.error("Something went wrong. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    },
+  });
+
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-32">
       <div className="max-w-4xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Left side - Benefits */}
+        {/* Left Side */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
@@ -117,7 +106,6 @@ const RegisterPage = () => {
             Who trust FlowPay for fast, fair, and transparent international
             money transfers.
           </p>
-
           <div className="space-y-4">
             {benefits.map((benefit, index) => (
               <motion.div
@@ -137,7 +125,7 @@ const RegisterPage = () => {
           </div>
         </motion.div>
 
-        {/* Right side - Registration form */}
+        {/* Right Side - Form */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
@@ -151,171 +139,161 @@ const RegisterPage = () => {
             <p className="text-slate-400">Get started in just a few minutes</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={formik.handleSubmit} className="space-y-6">
+            {/* First and Last Name */}
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-slate-400 text-sm mb-2">
-                  First name
-                </label>
-                <div className="relative">
-                  <User
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"
-                    size={20}
-                  />
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    className="w-full bg-slate-700 text-white pl-12 pr-4 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
-                    placeholder="First name"
-                    required
-                  />
-                </div>
+              <div className="relative">
+                <User
+                  className="absolute left-4 top-3.5 text-slate-400"
+                  size={20}
+                />
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="First name"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.firstName}
+                  className="w-full bg-slate-700 text-white pl-12 pr-4 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
+                />
+                {formik.touched.firstName && formik.errors.firstName && (
+                  <p className="text-red-400 text-xs mt-1">
+                    {formik.errors.firstName}
+                  </p>
+                )}
               </div>
-              <div>
-                <label className="block text-slate-400 text-sm mb-2">
-                  Last name
-                </label>
+
+              <div className="relative">
+                <User
+                  className="absolute left-4 top-3.5 text-slate-400"
+                  size={20}
+                />
                 <input
                   type="text"
                   name="lastName"
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 text-white px-4 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
                   placeholder="Last name"
-                  required
-                  disabled={isLoading}
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-slate-400 text-sm mb-2">
-                Email address
-              </label>
-              <div className="relative">
-                <Mail
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"
-                  size={20}
-                />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.lastName}
                   className="w-full bg-slate-700 text-white pl-12 pr-4 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
-                  placeholder="Enter your email"
-                  required
-                  disabled={isLoading}
                 />
+                {formik.touched.lastName && formik.errors.lastName && (
+                  <p className="text-red-400 text-xs mt-1">
+                    {formik.errors.lastName}
+                  </p>
+                )}
               </div>
             </div>
 
-            <div>
-              <label className="block text-slate-400 text-sm mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <Lock
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"
-                  size={20}
-                />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 text-white pl-12 pr-12 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
-                  placeholder="Create a password"
-                  minLength={6}
-                  required
-                  disabled={isLoading}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white disabled:opacity-50"
-                  disabled={isLoading}
-                >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                </button>
-              </div>
-              <div className="text-xs text-slate-500 mt-1">
-                Password must be at least 6 characters long
-              </div>
+            {/* Email */}
+            <div className="relative">
+              <Mail
+                className="absolute left-4 top-3.5 text-slate-400"
+                size={20}
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+                className="w-full bg-slate-700 text-white pl-12 pr-4 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
+              />
+              {formik.touched.email && formik.errors.email && (
+                <p className="text-red-400 text-xs mt-1">
+                  {formik.errors.email}
+                </p>
+              )}
             </div>
 
-            <div>
-              <label className="block text-slate-400 text-sm mb-2">
-                Confirm password
-              </label>
-              <div className="relative">
-                <Lock
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"
-                  size={20}
-                />
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                  className="w-full bg-slate-700 text-white pl-12 pr-12 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
-                  placeholder="Confirm your password"
-                  required
-                  disabled={isLoading}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white disabled:opacity-50"
-                  disabled={isLoading}
-                >
-                  {showConfirmPassword ? (
-                    <EyeOff size={20} />
-                  ) : (
-                    <Eye size={20} />
-                  )}
-                </button>
-              </div>
+            {/* Password */}
+            <div className="relative">
+              <Lock
+                className="absolute left-4 top-3.5 text-slate-400"
+                size={20}
+              />
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+                className="w-full bg-slate-700 text-white pl-12 pr-12 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-3.5 text-slate-400"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+              {formik.touched.password && formik.errors.password && (
+                <p className="text-red-400 text-xs mt-1">
+                  {formik.errors.password}
+                </p>
+              )}
             </div>
 
+            {/* Confirm Password */}
+            <div className="relative">
+              <Lock
+                className="absolute left-4 top-3.5 text-slate-400"
+                size={20}
+              />
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                placeholder="Confirm password"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.confirmPassword}
+                className="w-full bg-slate-700 text-white pl-12 pr-12 py-3 rounded-xl border border-slate-600 focus:border-lime-400 focus:outline-none"
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-4 top-3.5 text-slate-400"
+              >
+                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+              {formik.touched.confirmPassword &&
+                formik.errors.confirmPassword && (
+                  <p className="text-red-400 text-xs mt-1">
+                    {formik.errors.confirmPassword}
+                  </p>
+                )}
+            </div>
+
+            {/* Terms Checkbox */}
             <div className="flex items-start space-x-3">
               <input
                 type="checkbox"
-                id="terms"
-                checked={agreedToTerms}
-                onChange={(e) => setAgreedToTerms(e.target.checked)}
-                className="w-4 h-4 text-lime-400 bg-slate-700 border-slate-600 rounded focus:ring-lime-400 mt-1"
-                disabled={isLoading}
+                name="agreedToTerms"
+                checked={formik.values.agreedToTerms}
+                onChange={formik.handleChange}
+                className="w-4 h-4 mt-1"
               />
-              <label
-                htmlFor="terms"
-                className="text-slate-400 text-sm leading-relaxed"
-              >
+              <label className="text-slate-400 text-sm">
                 I agree to the{" "}
-                <button
-                  type="button"
-                  className="text-lime-400 hover:text-lime-300"
-                >
-                  Terms of Service
-                </button>{" "}
-                and{" "}
-                <button
-                  type="button"
-                  className="text-lime-400 hover:text-lime-300"
-                >
-                  Privacy Policy
-                </button>
+                <span className="text-lime-400">Terms of Service</span> and{" "}
+                <span className="text-lime-400">Privacy Policy</span>
               </label>
             </div>
+            {formik.touched.agreedToTerms && formik.errors.agreedToTerms && (
+              <p className="text-red-400 text-xs mt-1">
+                {formik.errors.agreedToTerms}
+              </p>
+            )}
 
+            {/* Submit Button */}
             <motion.button
               type="submit"
               disabled={isLoading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-lime-400 text-slate-900 py-3 rounded-xl font-semibold hover:bg-lime-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+              className="w-full bg-lime-400 text-slate-900 py-3 rounded-xl font-semibold hover:bg-lime-300 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {isLoading ? (
                 <>
