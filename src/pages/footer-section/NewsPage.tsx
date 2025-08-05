@@ -113,14 +113,14 @@ const NewsPage = () => {
     },
     {
       id: 9,
-      title: "Enhanced Security with Biometric Login",
-      category: "Product Updates",
+      title: "FlowPay Secures $20M in Series B Funding",
+      category: "Press Release",
       date: "2023-03-05",
-      author: "Rohit Menon",
+      author: "Corporate Communications",
       excerpt:
-        "Introducing biometric authentication for added security—now you can log in using fingerprint or facial recognition.",
+        "FlowPay has successfully raised $20 million in a Series B round led by global fintech investors, aiming to expand AI-powered payment solutions.",
       image:
-        "https://images.pexels.com/photos/5380665/pexels-photo-5380665.jpeg?auto=compress&cs=tinysrgb&w=800",
+        "https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=800",
       readTime: "3 min read",
     },
     {
