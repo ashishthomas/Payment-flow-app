@@ -27,6 +27,7 @@ import InvestorPage from "./pages/footer-section/InvestorPage";
 import PrivacyPage from "./pages/footer-section/PrivacyPage";
 import TermsPage from "./pages/footer-section/TermsPage";
 import CookiesPage from "./pages/footer-section/CookiesPage";
+import ChatPage from "./pages/ChatPage";
 
 const HomePage = () => (
   <>
@@ -53,6 +54,7 @@ function App() {
           <Route path="/help" element={<HelpPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/chat" element={<ChatPage />} />
 
           <Route path="/send-money" element={<SendMoneyPage />} />
           <Route path="/receive-money" element={<ReceiveMoneyPage />} />

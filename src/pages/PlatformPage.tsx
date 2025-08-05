@@ -174,29 +174,32 @@ console.log('Payment created:', payment.id);`;
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/register">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-lime-400 text-slate-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-lime-300 transition-colors inline-flex items-center space-x-3"
-              >
-                <span>Get API keys</span>
-                <ArrowRight size={20} />
-              </motion.button>
-            </Link>
-
+            {/* ✅ Updated Get API Keys Button */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="border border-slate-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-slate-800 transition-colors inline-flex items-center space-x-3"
               onClick={() =>
-                window.open("https://yourapp.com/lander", "_blank")
+                window.open("https://flowpay.com/dashboard/api-keys", "_blank")
               }
+              className="bg-lime-400 text-slate-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-lime-300 transition-colors inline-flex items-center space-x-3"
             >
-              <span>View docs</span>
+              <span>Get API Keys</span>
+              <ArrowRight size={20} />
+            </motion.button>
+
+            {/* ✅ Updated View Docs Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() =>
+                window.open("/docs/FlowPay_Project_Documentation.pdf", "_blank")
+              }
+              className="border border-slate-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-slate-800 transition-colors inline-flex items-center space-x-3"
+            >
+              <span>View Docs</span>
               <ExternalLink size={20} />
             </motion.button>
-          </div>
+          </div>     
         </motion.div>
       </div>
     </div>
