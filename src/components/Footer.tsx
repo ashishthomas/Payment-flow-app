@@ -78,10 +78,29 @@ const Footer = () => {
               best way to move and manage the world's money.
             </p>
             <div className="flex items-center space-x-4">
-              {[Twitter, Facebook, Instagram, Linkedin].map((Icon, index) => (
+              {[
+                {
+                  icon: Twitter,
+                  url: "https://twitter.com/yourprofile",
+                },
+                {
+                  icon: Facebook,
+                  url: "https://facebook.com/yourprofile",
+                },
+                {
+                  icon: Instagram,
+                  url: "https://instagram.com/yourprofile",
+                },
+                {
+                  icon: Linkedin,
+                  url: "https://linkedin.com/in/yourprofile",
+                },
+              ].map(({ icon: Icon, url }, index) => (
                 <motion.a
                   key={index}
-                  href="#"
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -2 }}
                   className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-slate-400 hover:text-lime-400 hover:bg-slate-700 transition-all duration-300"
                 >
