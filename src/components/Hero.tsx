@@ -82,7 +82,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Link to="/register">
+          <Link to="/started-payment">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -91,7 +91,7 @@ const Hero = () => {
               Get started
             </motion.button>
           </Link>
-          <motion.button
+          {/* <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="border border-slate-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-slate-800 transition-colors"
@@ -103,7 +103,17 @@ const Hero = () => {
             }}
           >
             See how it works
-          </motion.button>
+          </motion.button> */}
+
+          <Link to="/PaymentFlowPage">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="border border-slate-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-slate-800 transition-colors"
+            >
+              See how it works
+            </motion.button>
+          </Link>
         </motion.div>
 
         <motion.div

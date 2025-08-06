@@ -30,6 +30,9 @@ import TermsPage from "./pages/footer-section/TermsPage";
 import CookiesPage from "./pages/footer-section/CookiesPage";
 import ChatPage from "./pages/ChatPage";
 import CardDetails from "./pages/CardDetails";
+import PaymentFlowPage from "./pages/PaymentFlowPage";
+import StartedPaymentPage from "./pages/StartedPaymentPage";
+import DashboardPage from "./pages/DashboardPage";
 
 const HomePage = () => (
   <>
@@ -59,6 +62,9 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/cardDetails" element={<CardDetails />} />
+          <Route path="PaymentFlowPage" element={<PaymentFlowPage />} />
+          <Route path="/started-payment" element={<StartedPaymentPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
 
           <Route path="/send-money" element={<SendMoneyPage />} />
           <Route path="/receive-money" element={<ReceiveMoneyPage />} />
