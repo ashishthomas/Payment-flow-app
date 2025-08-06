@@ -122,7 +122,7 @@ const TransactionJourney = () => {
               No hidden fees, no inflated exchange rates. What you see is what
               you get.
             </p>
-            <Link to="/register">
+            <Link to="/cardDetails">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
