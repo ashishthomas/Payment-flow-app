@@ -140,7 +140,7 @@ const LoginPage = () => {
                 <button
                   type="button"
                   onClick={() => navigate("/forgot-password")}
-                  className="text-lime-400 text-sm hover:text-lime-300"
+                  className="text-lime-400 text-sm hover:text-lime-300 cursor-pointer"
                   disabled={isLoading}
                 >
                   Forgot password?
