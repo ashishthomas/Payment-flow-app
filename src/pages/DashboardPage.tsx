@@ -84,7 +84,7 @@ const DashboardPage = () => {
             </button>
           </div>
 
-          <div className="flex items-center justify-end space-x-4 text-right hidden md:block">
+          <div className="flex items-center justify-end space-x-4 text-right md:block">
             <TrendingUp size={18} className="text-lime-400" />
             <p className="text-sm text-slate-400">
               +12% more activity this week
