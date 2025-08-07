@@ -124,7 +124,7 @@ const DashboardPage = () => {
             ))}
           </div>
         </motion.div>
- login with parent and co parent 
+
         {/* Card Widget */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
