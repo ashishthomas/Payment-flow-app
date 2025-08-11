@@ -413,9 +413,13 @@ const CareersPage = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => {
-              toast.success(
-                "Thanks for your interest! We'll be in touch if a suitable role opens up."
-              );
+              window.location.href =
+                "mailto:hr@flowpay.com?subject=Resume Submission&body=Hi,%0D%0DPlease find my resume attached for your consideration.";
+              setTimeout(() => {
+                toast.success(
+                  "Thanks for your interest! We'll be in touch if a suitable role opens up."
+                );
+              }, 3000); // 3-second delay so toast appears after mail opens
             }}
             className="bg-lime-400 text-slate-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-lime-300 transition-colors inline-flex items-center space-x-3"
           >
