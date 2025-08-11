@@ -16,7 +16,7 @@ import HelpPage from "./pages/Header/HelpPage";
 import LoginPage from "./pages/LoginPage";
 import ForgotPasswordPage from "./pages/ForgotPassword";
 import RegisterPage from "./pages/RegisterPage";
-
+import Journey from "./pages/journey";
 import SendMoneyPage from "./pages/footer/SendMoneyPage";
 import ReceiveMoneyPage from "./pages/footer/ReceiveMoneyPage";
 import CardPage from "./pages/CardPage";
@@ -65,6 +65,7 @@ function App() {
           <Route path="PaymentFlowPage" element={<PaymentFlowPage />} />
           <Route path="/started-payment" element={<StartedPaymentPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/journey" element={<Journey />} />
 
           <Route path="/send-money" element={<SendMoneyPage />} />
           <Route path="/receive-money" element={<ReceiveMoneyPage />} />

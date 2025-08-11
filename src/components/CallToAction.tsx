@@ -145,7 +145,7 @@ const CallToAction = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-center mt-16"
         >
-          <Link to="/register">
+          <Link to="/journey">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
