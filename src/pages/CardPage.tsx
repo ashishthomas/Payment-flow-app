@@ -116,7 +116,7 @@ const CardPage = () => {
               </div>
               <div className="space-y-4">
                 <div className="font-mono text-xl tracking-wider">
-                  •••• •••• •••• 1234
+                  •••• •••• •••• 6952
                 </div>
                 <div className="flex justify-between">
                   <div>
@@ -128,7 +128,7 @@ const CardPage = () => {
                     <div className="font-mono">•••</div>
                   </div>
                 </div>
-                <div className="font-semibold">JOHN SMITH</div>
+                <div className="font-semibold">ASHISH SUNIL THOMAS</div>
               </div>
             </div>
             <motion.div

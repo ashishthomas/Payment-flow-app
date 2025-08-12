@@ -125,6 +125,12 @@ await client.createPayment({ amount: 2000, currency: 'USD' });`}
         <>
           <p>Use sandbox keys for testing:</p>
           <CodeBlock code={`sk_test_51M...`} />
+          <p className="mt-4">Example usage:</p>
+          <CodeBlock
+            code={`import FlowPay from 'flowpay-sdk';
+const client = new FlowPay('sk_test_51M...');
+await client.createPayment({ amount: 2000, currency: 'USD' });`}
+          />
         </>
       ),
     },
@@ -180,6 +186,24 @@ await client.createPayment({ amount: 2000, currency: 'USD' });`}
             <strong>A:</strong> Use the Refund API:
           </p>
           <CodeBlock code={`POST /v1/refunds`} />
+          <p className="mt-4">
+            <strong>Q:</strong> What currencies are supported?
+            <br />
+            <strong>A:</strong> FlowPay supports over 100 currencies.
+          </p>
+          <CodeBlock code={`GET /v1/currencies`} />
+          <p className="mt-4">
+            <strong>Q:</strong> What payment methods are available?
+            <br />
+            <strong>A:</strong> FlowPay supports over 20 payment methods.
+          </p>
+          <CodeBlock code={`GET /v1/payment-methods`} />
+          <p className="mt-4">
+            <strong>Q:</strong> How do I handle disputes?
+            <br />
+            <strong>A:</strong> Use the Disputes API:
+          </p>
+          <CodeBlock code={`POST /v1/disputes`} />
         </>
       ),
     },
