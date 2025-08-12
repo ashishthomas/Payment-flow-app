@@ -60,7 +60,12 @@ function App() {
         <Navbar />
         <Suspense
           fallback={
-            <div className="text-white text-center py-20">Loading...</div>
+            <div className="flex flex-col items-center justify-center min-h-[60vh] bg-slate-900">
+              <div className="w-12 h-12 border-4 border-lime-600 border-t-transparent rounded-full animate-spin"></div>
+              <p className="mt-4 text-lg text-gray-300 font-medium">
+                Loading content...
+              </p>
+            </div>
           }
         >
           <Routes>
