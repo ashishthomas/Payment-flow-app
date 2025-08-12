@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-
+import { useNavigate } from "react-router-dom";
 import {
   Code,
   Layers,
@@ -55,6 +55,8 @@ const payment = await flowpay.payments.create({
 });
 
 console.log('Payment created:', payment.id);`;
+
+  const navigate = useNavigate();
 
   return (
     <div className="pt-32 pb-16">
@@ -191,9 +193,7 @@ console.log('Payment created:', payment.id);`;
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() =>
-                window.open("/docs/FlowPay_Project_Documentation.pdf", "_blank")
-              }
+              onClick={() => navigate("/docs")}
               className="border border-slate-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-slate-800 transition-colors inline-flex items-center space-x-3"
             >
               <span>View Docs</span>

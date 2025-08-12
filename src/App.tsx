@@ -17,6 +17,7 @@ const CallToAction = lazy(() => import("./components/CallToAction"));
 const PersonalPage = lazy(() => import("./pages/Header/PersonalPage"));
 const BusinessPage = lazy(() => import("./pages/Header/BusinessPage"));
 const PlatformPage = lazy(() => import("./pages/Header/PlatformPage"));
+const DocsPage = lazy(() => import("./pages/DocsPage"));
 const HelpPage = lazy(() => import("./pages/Header/HelpPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const ForgotPasswordPage = lazy(() => import("./pages/ForgotPassword"));
@@ -67,6 +68,7 @@ function App() {
             <Route path="/personal" element={<PersonalPage />} />
             <Route path="/business" element={<BusinessPage />} />
             <Route path="/platform" element={<PlatformPage />} />
+            <Route path="/docs" element={<DocsPage />} />
             <Route path="/help" element={<HelpPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
