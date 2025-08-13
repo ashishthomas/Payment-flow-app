@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -10,43 +10,23 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+import { faqs } from "../../data/HelpData";
+
 const HelpPage = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
-  const faqs = [
-    {
-      question: "How do I send money internationally?",
-      answer:
-        "You can send money through our app or website. Simply enter the recipient details, amount, and payment method. We'll show you the exact fees and exchange rate before you confirm.",
-    },
-    {
-      question: "What are your fees?",
-      answer:
-        "Our fees are transparent and competitive. For most transfers, we charge a small fixed fee plus the real exchange rate with no markup. Check our fee calculator for exact costs.",
-    },
-    {
-      question: "How long do transfers take?",
-      answer:
-        "Most transfers arrive within minutes to a few hours. Bank transfers may take 1-2 business days depending on the destination country and payment method.",
-    },
-    {
-      question: "Is my money safe with FlowPay?",
-      answer:
-        "Yes, your money is protected by bank-level security, regulatory compliance, and deposit insurance up to applicable limits. We're regulated in multiple countries.",
-    },
-    {
-      question: "Can I get a FlowPay debit card?",
-      answer:
-        "Yes, our multi-currency debit card lets you spend in 175+ countries at the real exchange rate with no foreign transaction fees.",
-    },
-    {
-      question: "How do I verify my account?",
-      answer:
-        "Account verification typically requires a government-issued ID and proof of address. The process is usually completed within 24 hours.",
-    },
-  ];
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+    }, 300);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchQuery]);
 
   const contactOptions = [
     {
@@ -130,9 +110,9 @@ const HelpPage = () => {
               className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-6 text-center cursor-pointer hover:bg-slate-800/70 transition-all duration-300"
               onClick={() => {
                 if (option.title === "Live Chat") {
-                  navigate("/chat"); // ✅ navigate to chat page
+                  navigate("/chat");
                 } else if (option.title === "Phone Support") {
-                  window.open("tel:+1-800-FLOWPAY");
+                  window.open("tel:+1-700-FLOWPAY");
                 } else {
                   window.open("mailto:support@flowpay.com");
                 }
@@ -192,7 +172,7 @@ const HelpPage = () => {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="px-6 pb-4"
+                    className="px-6 pb-4 text-slate-400"
                   >
                     <p className="text-slate-400 leading-relaxed">
                       {faq.answer}
