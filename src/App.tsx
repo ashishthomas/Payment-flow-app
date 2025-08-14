@@ -39,6 +39,7 @@ const CardDetails = lazy(() => import("./pages/CardDetails"));
 const PaymentFlowPage = lazy(() => import("./pages/PaymentFlowPage"));
 const StartedPaymentPage = lazy(() => import("./pages/StartedPaymentPage"));
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
+const FundsDetail = lazy(() => import("./pages/FundsDetail"));
 
 // HomePage as inline component
 const HomePage = () => (
@@ -83,6 +84,7 @@ function App() {
             <Route path="/PaymentFlowPage" element={<PaymentFlowPage />} />
             <Route path="/started-payment" element={<StartedPaymentPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/fundsDetail" element={<FundsDetail />} />
             <Route path="/journey" element={<Journey />} />
             <Route path="/send-money" element={<SendMoneyPage />} />
             <Route path="/receive-money" element={<ReceiveMoneyPage />} />

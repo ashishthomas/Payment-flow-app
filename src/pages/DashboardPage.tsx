@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { CreditCard, Send, TrendingUp, CalendarDays, Plus } from "lucide-react";
+import { useNavigate } from "react-router-dom"; // For navigation
 
 const DashboardPage = () => {
+  const navigate = useNavigate();
+
   const user = {
     name: "Ashish Sunil Thomas",
     balance: "₹1,52,300.00",
@@ -39,6 +42,32 @@ const DashboardPage = () => {
     },
   ];
 
+  const handleSendMoney = () => {
+    const newTransaction = {
+      id: Date.now(),
+      title: "Manual Send Money Entry",
+      amount: "-₹5,000",
+      date: new Date().toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
+      location: "Bengaluru, India",
+    };
+
+    // Get existing transactions from localStorage
+    const stored = JSON.parse(localStorage.getItem("transactions") ?? "[]");
+    stored.push(newTransaction);
+
+    // Save back to localStorage
+    localStorage.setItem("transactions", JSON.stringify(stored));
+    alert("Transaction saved to local storage!");
+  };
+
+  const handleAddFunds = () => {
+    navigate("/fundsDetail");
+  };
+
   return (
     <div className="min-h-screen bg-slate-900 text-white px-6 py-20">
       <div className="max-w-7xl mx-auto space-y-12">
@@ -74,13 +103,17 @@ const DashboardPage = () => {
           </div>
 
           <div className="flex gap-4 justify-center md:justify-start">
-            <button className="bg-lime-400 hover:bg-lime-300 text-slate-900 px-5 py-3 rounded-full font-medium flex items-center gap-2 transition">
-              <Send size={18} />
-              Send Money
+            <button
+              onClick={handleSendMoney}
+              className="bg-lime-400 hover:bg-lime-300 text-slate-900 px-5 py-3 rounded-full font-medium flex items-center gap-2 transition"
+            >
+              <Send size={18} /> Send Money
             </button>
-            <button className="border border-slate-600 hover:bg-slate-800 px-5 py-3 rounded-full font-medium flex items-center gap-2 transition">
-              <Plus size={18} />
-              Add Funds
+            <button
+              onClick={handleAddFunds}
+              className="border border-slate-600 hover:bg-slate-800 px-5 py-3 rounded-full font-medium flex items-center gap-2 transition"
+            >
+              <Plus size={18} /> Add Funds
             </button>
           </div>
 
@@ -122,39 +155,6 @@ const DashboardPage = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </motion.div>
-
-        {/* Card Widget */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          <div className="bg-gradient-to-br from-emerald-800/40 to-slate-800/50 border border-slate-700/40 p-6 rounded-2xl relative overflow-hidden">
-            <CreditCard size={24} className="text-lime-400 mb-4" />
-            <h4 className="text-white font-medium text-xl mb-1">
-              FlowPay Card
-            </h4>
-            <p className="text-slate-400 text-sm mb-4">
-              Tap. Swipe. Convert instantly.
-            </p>
-            <div className="text-slate-300 text-xs">Card ending in 1234</div>
-            <div className="text-slate-300 text-xs">Valid Thru: 12/28</div>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/30 border border-slate-700/40 p-6 rounded-2xl">
-            <CalendarDays size={24} className="text-lime-400 mb-4" />
-            <h4 className="text-white font-medium text-xl mb-1">
-              Scheduled Transfers
-            </h4>
-            <p className="text-slate-400 text-sm mb-2">
-              You have 2 upcoming transfers scheduled this week.
-            </p>
-            <button className="mt-2 text-lime-400 hover:underline text-sm">
-              View Schedule
-            </button>
           </div>
         </motion.div>
       </div>

@@ -172,7 +172,7 @@ const HelpPage = () => {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="px-6 pb-4 text-slate-400"
+                    className="px-6 pb-4"
                   >
                     <p className="text-slate-400 leading-relaxed">
                       {faq.answer}
