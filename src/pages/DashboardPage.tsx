@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { CreditCard, Send, TrendingUp, CalendarDays, Plus } from "lucide-react";
+import { Send, TrendingUp, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom"; // For navigation
 
 const DashboardPage = () => {
