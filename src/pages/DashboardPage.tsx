@@ -93,7 +93,7 @@ const DashboardPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
           className="bg-slate-800/40 backdrop-blur-md border border-slate-700/50 p-8 rounded-3xl grid grid-cols-1 md:grid-cols-3 gap-8 items-center"
-        >
+        > 
           <div>
             <p className="text-slate-400 mb-2">Available Balance</p>
             <h2 className="text-4xl font-semibold text-lime-400">
