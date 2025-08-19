@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Send, TrendingUp, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom"; // For navigation
+import { recentTransactions } from "../data/DashboardTransacrion";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -10,37 +11,6 @@ const DashboardPage = () => {
     balance: "₹1,52,300.00",
     currency: "INR",
   };
-
-  const recentTransactions = [
-    {
-      id: 1,
-      title: "Dinner at Kyoto Sushi",
-      amount: "-¥4,500",
-      date: "Aug 05, 2025",
-      location: "Tokyo, Japan",
-    },
-    {
-      id: 2,
-      title: "Apple Subscription",
-      amount: "-$9.99",
-      date: "Aug 04, 2025",
-      location: "New York, USA",
-    },
-    {
-      id: 3,
-      title: "Coffee with client",
-      amount: "-£6.50",
-      date: "Aug 03, 2025",
-      location: "London, UK",
-    },
-    {
-      id: 4,
-      title: "Client payment received",
-      amount: "+₹75,000",
-      date: "Aug 01, 2025",
-      location: "Delhi, India",
-    },
-  ];
 
   const handleSendMoney = () => {
     const newTransaction = {
@@ -93,7 +63,7 @@ const DashboardPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
           className="bg-slate-800/40 backdrop-blur-md border border-slate-700/50 p-8 rounded-3xl grid grid-cols-1 md:grid-cols-3 gap-8 items-center"
-        > 
+        >
           <div>
             <p className="text-slate-400 mb-2">Available Balance</p>
             <h2 className="text-4xl font-semibold text-lime-400">
