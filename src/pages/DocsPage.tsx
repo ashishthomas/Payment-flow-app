@@ -1,4 +1,4 @@
-// src/pages/DocsPage.tsx
+
 import * as React from "react";
 import { useState } from "react";
 import { Copy } from "lucide-react";
@@ -157,8 +157,28 @@ await client.createPayment({ amount: 2000, currency: 'USD' });`}
       content: (
         <>
           <p>
-            FlowPay is PCI DSS Level 1 compliant and uses TLS encryption for all
-            requests.
+            FlowPay is <strong>PCI DSS Level 1 compliant</strong> and all
+            communication is protected with <strong>TLS 1.2+ encryption</strong>.
+          </p>
+          <p>
+            Sensitive data such as cardholder information is{" "}
+            <strong>tokenized</strong> and never stored in plain text. We follow{" "}
+            <strong>industry best practices</strong> for key management and
+            encryption at rest.
+          </p>
+          <p>
+            Our systems are regularly <strong>penetration tested</strong> and{" "}
+            <strong> vulnerability scanned</strong> to ensure ongoing security.
+          </p>
+          <p>
+            Access to customer data is restricted via{" "}
+            <strong>role-based access controls (RBAC)</strong>,{" "}
+            <strong>MFA</strong>, and continuous monitoring.
+          </p>
+          <p>
+            FlowPay also complies with <strong>GDPR</strong> and{" "}
+            <strong>CCPA</strong> standards, ensuring customer data privacy and
+            transparency.
           </p>
         </>
       ),
