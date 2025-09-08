@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import { faqs } from "../../data/HelpData";
+import { HelpPageText } from "../../data/text/HelpPageText";
 
 const HelpPage = () => {
   const navigate = useNavigate();
@@ -31,31 +32,22 @@ const HelpPage = () => {
   const contactOptions = [
     {
       icon: MessageCircle,
-      title: "Live Chat",
-      description: "Get instant help from our support team",
-      action: "Start chat",
-      available: "24/7",
+      ...HelpPageText.contactOptions[0],
     },
     {
       icon: Phone,
-      title: "Phone Support",
-      description: "Speak directly with a support specialist",
-      action: "Call now",
-      available: "Mon-Fri 9AM-6PM",
+      ...HelpPageText.contactOptions[1],
     },
     {
       icon: Mail,
-      title: "Email Support",
-      description: "Send us a detailed message",
-      action: "Send email",
-      available: "Response within 24h",
+      ...HelpPageText.contactOptions[2],
     },
   ];
 
   const filteredFaqs = faqs.filter(
     (faq) =>
-      faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
+      faq.question.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+      faq.answer.toLowerCase().includes(debouncedQuery.toLowerCase())
   );
 
   return (
@@ -68,11 +60,10 @@ const HelpPage = () => {
           className="text-center mb-16"
         >
           <h1 className="text-5xl md:text-6xl font-light text-white mb-6">
-            How can we <span className="text-lime-400 font-medium">help?</span>
+            {HelpPageText.title}
           </h1>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Find answers to common questions or get in touch with our support
-            team.
+            {HelpPageText.subtitle}
           </p>
         </motion.div>
 
@@ -89,7 +80,7 @@ const HelpPage = () => {
           />
           <input
             type="text"
-            placeholder="Search for help..."
+            placeholder={HelpPageText.searchPlaceholder}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl pl-12 pr-6 py-4 text-white placeholder-slate-400 focus:border-lime-400 focus:outline-none"
@@ -140,7 +131,7 @@ const HelpPage = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
         >
           <h2 className="text-3xl font-semibold text-white mb-8 text-center">
-            Frequently Asked Questions
+            {HelpPageText.faqTitle}
           </h2>
 
           <div className="space-y-4">
@@ -186,8 +177,7 @@ const HelpPage = () => {
           {filteredFaqs.length === 0 && searchQuery && (
             <div className="text-center py-12">
               <p className="text-slate-400">
-                No results found for "{searchQuery}". Try a different search
-                term or contact support.
+                {HelpPageText.noResults(searchQuery)}
               </p>
             </div>
           )}
