@@ -6,24 +6,28 @@ const Journey = () => {
   const steps = useMemo(
     () => [
       {
+        id: "discover",
         icon: <Compass size={32} className="text-lime-400" />,
         title: "Discover FlowPay",
         description:
           "Learn how FlowPay helps you send, spend, and save money without borders or hidden fees.",
       },
       {
+        id: "secure",
         icon: <ShieldCheck size={32} className="text-lime-400" />,
         title: "Secure Your Finances",
         description:
           "Your money and data are protected with cutting-edge encryption and 24/7 monitoring.",
       },
       {
+        id: "send",
         icon: <Send size={32} className="text-lime-400" />,
         title: "Send Without Limits",
         description:
           "Transfer funds to over 80 countries with real exchange rates and no hidden charges.",
       },
       {
+        id: "spend",
         icon: <CreditCard size={32} className="text-lime-400" />,
         title: "Spend Anywhere",
         description:
@@ -68,7 +72,7 @@ const Journey = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl relative z-10 mt-8 w-full">
         {steps.map((step, index) => (
           <motion.div
-            key={index}
+            key={step.id}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}

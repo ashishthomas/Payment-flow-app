@@ -54,7 +54,12 @@ const ForgotPasswordPage = () => {
           <Form className="space-y-6">
             {/* Email */}
             <div>
-              <label className="block text-slate-400 text-sm mb-2">Email</label>
+              <label
+                htmlFor="email"
+                className="block text-slate-400 text-sm mb-2"
+              >
+                Email
+              </label>
               <div className="relative">
                 <Mail
                   className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"
@@ -76,7 +81,10 @@ const ForgotPasswordPage = () => {
 
             {/* New Password */}
             <div>
-              <label className="block text-slate-400 text-sm mb-2">
+              <label
+                htmlFor="email"
+                className="block text-slate-400 text-sm mb-2"
+              >
                 New Password
               </label>
               <div className="relative">
@@ -100,7 +108,10 @@ const ForgotPasswordPage = () => {
 
             {/* Confirm Password */}
             <div>
-              <label className="block text-slate-400 text-sm mb-2">
+              <label
+                htmlFor="email"
+                className="block text-slate-400 text-sm mb-2"
+              >
                 Confirm Password
               </label>
               <div className="relative">
