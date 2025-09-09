@@ -1,39 +1,21 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { User, CreditCard, Globe, Shield, ArrowRight } from "lucide-react";
+import { PersonalPageText } from "../../data/text/PerosnalPage";
 
 const PersonalPage = () => {
   const features = [
     {
       icon: Globe,
-      title: "Multi-currency account",
-      description:
-        "Hold and manage money in 50+ currencies with real exchange rates.",
-      benefits: [
-        "No monthly fees",
-        "Real exchange rates",
-        "Local bank details",
-      ],
+      ...PersonalPageText.PersonalOptions[0],
     },
     {
       icon: CreditCard,
-      title: "FlowPay debit card",
-      description: "Spend worldwide with automatic currency conversion.",
-      benefits: [
-        "Free ATM withdrawals",
-        "No foreign transaction fees",
-        "Contactless payments",
-      ],
+      ...PersonalPageText.PersonalOptions[1],
     },
     {
       icon: Shield,
-      title: "Secure transfers",
-      description: "Send money to friends and family in 80+ countries.",
-      benefits: [
-        "Bank-level security",
-        "Fast transfers",
-        "Low transparent fees",
-      ],
+      ...PersonalPageText.PersonalOptions[2],
     },
   ];
 
@@ -49,12 +31,11 @@ const PersonalPage = () => {
           <div className="inline-flex items-center space-x-3 mb-6">
             <User className="text-lime-400" size={48} />
             <h1 className="text-5xl md:text-6xl font-light text-white">
-              Personal Banking
+              {PersonalPageText.title}
             </h1>
           </div>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Everything you need to manage your money internationally. From
-            multi-currency accounts to worldwide spending.
+            {PersonalPageText.description}
           </p>
         </motion.div>
 
@@ -99,11 +80,10 @@ const PersonalPage = () => {
           className="bg-gradient-to-br from-lime-400/10 to-emerald-400/10 border border-lime-400/30 rounded-3xl p-12 text-center"
         >
           <h2 className="text-4xl font-semibold text-white mb-6">
-            Ready to get started?
+            {PersonalPageText.ctaText}
           </h2>
           <p className="text-xl text-slate-400 mb-8 max-w-2xl mx-auto">
-            Join millions of people who trust FlowPay for their international
-            money needs.
+            {PersonalPageText.ctaSubText}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -113,7 +93,7 @@ const PersonalPage = () => {
                 whileTap={{ scale: 0.95 }}
                 className="bg-lime-400 text-slate-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-lime-300 transition-colors inline-flex items-center space-x-3"
               >
-                <span>Open account</span>
+                {PersonalPageText.ctaButton}
                 <ArrowRight size={20} />
               </motion.button>
             </Link>
@@ -124,7 +104,7 @@ const PersonalPage = () => {
                 whileTap={{ scale: 0.95 }}
                 className="border border-slate-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-slate-800 transition-colors"
               >
-                Learn more
+                {PersonalPageText.ctaLearnMore}
               </motion.button>
             </Link>
           </div>

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { PlatformPageText } from "../../data/text/PlatformPageText";
 import {
   Code,
   Layers,
@@ -13,27 +14,15 @@ const PlatformPage = () => {
   const apiFeatures = [
     {
       icon: Code,
-      title: "RESTful API",
-      description:
-        "Simple, powerful APIs to integrate FlowPay into your applications.",
-      features: ["Easy integration", "Comprehensive docs", "SDKs available"],
+      ...PlatformPageText.PlatformPageOptions[0],
     },
     {
       icon: Webhook,
-      title: "Real-time webhooks",
-      description:
-        "Get instant notifications about payment status and account updates.",
-      features: ["Event-driven", "Secure delivery", "Retry logic"],
+      ...PlatformPageText.PlatformPageOptions[1],
     },
     {
       icon: Database,
-      title: "Data & Analytics",
-      description: "Access detailed transaction data and business insights.",
-      features: [
-        "Transaction history",
-        "Custom reports",
-        "Export capabilities",
-      ],
+      ...PlatformPageText.PlatformPageOptions[2],
     },
   ];
 
@@ -70,13 +59,11 @@ console.log('Payment created:', payment.id);`;
           <div className="inline-flex items-center space-x-3 mb-6">
             <Layers className="text-lime-400" size={48} />
             <h1 className="text-5xl md:text-6xl font-light text-white">
-              Developer Platform
+              {PlatformPageText.title}
             </h1>
           </div>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-            Build the future of finance with our comprehensive APIs and
-            developer tools. From simple integrations to complex financial
-            products.
+            {PlatformPageText.description}
           </p>
         </motion.div>
 
@@ -87,11 +74,10 @@ console.log('Payment created:', payment.id);`;
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl font-semibold text-white mb-6">
-              Get started in minutes
+              {PlatformPageText.getStarted}
             </h2>
             <p className="text-slate-400 mb-8 leading-relaxed">
-              Our developer-first approach means you can integrate FlowPay into
-              your application quickly and easily.
+              {PlatformPageText.startedSubtext}
             </p>
 
             <div className="space-y-4">
@@ -168,15 +154,13 @@ console.log('Payment created:', payment.id);`;
           className="bg-gradient-to-br from-lime-400/10 to-emerald-400/10 border border-lime-400/30 rounded-3xl p-12 text-center"
         >
           <h2 className="text-4xl font-semibold text-white mb-6">
-            Ready to build?
+            {PlatformPageText.readytoBuild}
           </h2>
           <p className="text-xl text-slate-400 mb-8 max-w-2xl mx-auto">
-            Join thousands of developers building the next generation of
-            financial applications.
+            {PlatformPageText.buildSubtext}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            {/* ✅ Updated Get API Keys Button */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -185,18 +169,16 @@ console.log('Payment created:', payment.id);`;
               }
               className="bg-lime-400 text-slate-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-lime-300 transition-colors inline-flex items-center space-x-3"
             >
-              <span>Get API Keys</span>
+              <span>{PlatformPageText.apiButton}</span>
               <ArrowRight size={20} />
             </motion.button>
-
-            {/* ✅ Updated View Docs Button */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate("/docs")}
               className="border border-slate-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-slate-800 transition-colors inline-flex items-center space-x-3"
             >
-              <span>View Docs</span>
+              <span>{PlatformPageText.docsButton}</span>
               <ExternalLink size={20} />
             </motion.button>
           </div>
