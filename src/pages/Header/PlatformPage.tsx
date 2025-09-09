@@ -104,7 +104,9 @@ console.log('Payment created:', payment.id);`;
             className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-6"
           >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-white font-semibold">Quick Start</h3>
+              <h3 className="text-white font-semibold">
+                {PlatformPageText.quickStart}
+              </h3>
               <ExternalLink className="text-slate-400" size={20} />
             </div>
             <pre className="text-sm text-slate-300 overflow-x-auto">
