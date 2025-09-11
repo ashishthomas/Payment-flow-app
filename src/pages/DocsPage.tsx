@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { useState } from "react";
 import { Copy } from "lucide-react";
@@ -158,7 +157,8 @@ await client.createPayment({ amount: 2000, currency: 'USD' });`}
         <>
           <p>
             FlowPay is <strong>PCI DSS Level 1 compliant</strong> and all
-            communication is protected with <strong>TLS 1.2+ encryption</strong>.
+            communication is protected with <strong>TLS 1.2+ encryption</strong>
+            .
           </p>
           <p>
             Sensitive data such as cardholder information is{" "}
