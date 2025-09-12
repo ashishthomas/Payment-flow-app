@@ -149,7 +149,7 @@ const CallToAction = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-lime-400 text-slate-900 px-12 py-6 rounded-full text-xl font-semibold hover:bg-lime-300 transition-colors inline-flex items-center space-x-3"
+              className="bg-lime-400 text-slate-900 px-12 py-6 rounded-full text-xl font-semibold hover:bg-lime-300 transition-colors inline-flex items-center space-x-3 cursor-pointer"
             >
               <Download size={24} />
               <span>Start your journey today</span>

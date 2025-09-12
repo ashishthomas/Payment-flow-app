@@ -116,7 +116,7 @@ const CurrencyDashboard = () => {
           className="text-center mt-16"
         >
           <Link to="/register">
-            <button className="bg-lime-400 text-slate-900 px-8 py-4 rounded-full text-lg font-medium hover:bg-lime-300 transition-colors">
+            <button className="bg-lime-400 text-slate-900 px-8 py-4 rounded-full text-lg font-medium hover:bg-lime-300 transition-colors cursor-pointer">
               Open multi-currency account
             </button>
           </Link>

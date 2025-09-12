@@ -132,10 +132,12 @@ const LoginPage = () => {
                 <label className="flex items-center space-x-2">
                   <input
                     type="checkbox"
-                    className="w-4 h-4 text-lime-400 bg-slate-700 border-slate-600 rounded focus:ring-lime-400"
+                    className=" appearance-none w-4 h-4 mt-1 border-2 border-slate-500 rounded-md bg-slate-700 checked:bg-lime-400
+                              checked:border-lime-400 checked:hover:bg-lime-300 focus:outline-none focus:ring-2 focus:ring-lime-400 
+                                focus:ring-offset-1 transition-color cursor-pointer"
                     disabled={isLoading}
                   />
-                  <span className="text-slate-400 text-sm">Remember me</span>
+                  <span className="text-slate-300 text-sm">Remember me</span>
                 </label>
                 <button
                   type="button"

@@ -273,7 +273,9 @@ const RegisterPage = () => {
                 name="agreedToTerms"
                 checked={formik.values.agreedToTerms}
                 onChange={formik.handleChange}
-                className="w-4 h-4 mt-1"
+                className=" appearance-none w-4 h-4 mt-1 border-2 border-slate-500 rounded-md bg-slate-700 checked:bg-lime-400
+                          checked:border-lime-400 checked:hover:bg-lime-300 focus:outline-none focus:ring-2 focus:ring-lime-400 
+                            focus:ring-offset-1 transition-color cursor-pointer"
               />
               <label className="text-slate-400 text-sm">
                 I agree to the{" "}

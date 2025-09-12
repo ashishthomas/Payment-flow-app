@@ -26,7 +26,7 @@ const Hero = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}
-        className="absolute top-32 right-8 bg-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-4 text-center"
+        className="absolute top-40 md:top-32 right-8 bg-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-4 text-center"
       >
         <div className="flex items-center justify-center mb-2">
           {[...Array(5)].map((_, i) => (
@@ -42,7 +42,7 @@ const Hero = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2 }}
-        className="absolute top-48 left-8 bg-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-4 text-center"
+        className="absolute top-60 md:top-40 left-8 bg-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-4 text-center"
       >
         <div className="flex items-center justify-center mb-2">
           {[...Array(5)].map((_, i) => (
@@ -60,7 +60,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-6xl md:text-8xl font-light text-white mb-8 leading-tight"
+          className="text-6xl md:text-8xl font-light text-white mb-8 leading-tight mt-20 "
         >
           One account for{" "}
           <span className="text-lime-400 font-medium">the world's</span> money
@@ -120,7 +120,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="mt-16 text-slate-400 text-sm"
+          className="mt-17 mb-4 text-slate-400 text-sm"
         >
           Trusted by 16+ million customers worldwide
         </motion.div>
