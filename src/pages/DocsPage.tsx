@@ -1,17 +1,9 @@
-import * as React from "react";
 import { useState } from "react";
 import { Copy } from "lucide-react";
-
-type Section = {
-  id: string;
-  title: string;
-  content: React.JSX.Element;
-};
+import { DOCS_TEXT } from "../constants/DocsPage-text-constants";
 
 const CodeBlock = ({ code }: { code: string }) => {
-  const copyCode = () => {
-    navigator.clipboard.writeText(code);
-  };
+  const copyCode = () => navigator.clipboard.writeText(code);
   return (
     <div className="relative">
       <pre className="bg-slate-800 p-4 rounded-md text-sm overflow-x-auto text-lime-300">
@@ -28,216 +20,137 @@ const CodeBlock = ({ code }: { code: string }) => {
 };
 
 export default function DocsPage() {
-  const sections: Section[] = [
+  const { sections, title } = DOCS_TEXT;
+
+  const sectionList = [
     {
-      id: "quick-start",
-      title: "Quick Start",
+      id: sections.quickStart.id,
+      title: sections.quickStart.title,
       content: (
         <>
-          <p className="mb-4">
-            Get started with FlowPay in 3 steps: create an account, get your API
-            key, and make your first request.
-          </p>
-          <CodeBlock
-            code={`curl -X POST "https://api.flowpay.com/v1/payments" \\
--H "Authorization: Bearer YOUR_API_KEY" \\
--H "Content-Type: application/json" \\
--d '{
-  "amount": 1000,
-  "currency": "USD",
-  "source": "tok_visa"
-}'`}
-          />
+          <p className="mb-4">{sections.quickStart.description}</p>
+          <CodeBlock code={sections.quickStart.code} />
         </>
       ),
     },
     {
-      id: "authentication",
-      title: "Authentication",
+      id: sections.authentication.id,
+      title: sections.authentication.title,
       content: (
         <>
-          <p>Use your API key in the Authorization header:</p>
-          <CodeBlock code={`Authorization: Bearer YOUR_API_KEY`} />
+          <p>{sections.authentication.description}</p>
+          <CodeBlock code={sections.authentication.code} />
         </>
       ),
     },
     {
-      id: "payments-api",
-      title: "Payments API",
+      id: sections.paymentsAPI.id,
+      title: sections.paymentsAPI.title,
       content: (
         <>
-          <p>Create a payment:</p>
-          <CodeBlock
-            code={`POST /v1/payments
-{
-  "amount": 5000,
-  "currency": "USD",
-  "source": "tok_mastercard"
-}`}
-          />
-          <p className="mt-4">Retrieve a payment:</p>
-          <CodeBlock code={`GET /v1/payments/{payment_id}`} />
+          <p>{sections.paymentsAPI.create}</p>
+          <CodeBlock code={sections.paymentsAPI.createCode} />
+          <p className="mt-4">{sections.paymentsAPI.retrieve}</p>
+          <CodeBlock code={sections.paymentsAPI.retrieveCode} />
         </>
       ),
     },
     {
-      id: "webhooks",
-      title: "Webhooks",
+      id: sections.webhooks.id,
+      title: sections.webhooks.title,
       content: (
         <>
-          <p>
-            FlowPay sends events to your webhook URL. Example: payment
-            successful.
-          </p>
-          <CodeBlock
-            code={`{
-  "event": "payment.success",
-  "data": {
-    "id": "pay_12345",
-    "amount": 1000
-  }
-}`}
-          />
+          <p>{sections.webhooks.description}</p>
+          <CodeBlock code={sections.webhooks.code} />
         </>
       ),
     },
     {
-      id: "sdks",
-      title: "SDKs & Client Libraries",
+      id: sections.sdks.id,
+      title: sections.sdks.title,
       content: (
         <>
-          <p>Install via npm:</p>
-          <CodeBlock code={`npm install flowpay-sdk`} />
-          <p className="mt-4">Example usage:</p>
-          <CodeBlock
-            code={`import FlowPay from 'flowpay-sdk';
-const client = new FlowPay('YOUR_API_KEY');
-await client.createPayment({ amount: 2000, currency: 'USD' });`}
-          />
+          <p>{sections.sdks.install}</p>
+          <CodeBlock code={sections.sdks.installCode} />
+          <p className="mt-4">{sections.sdks.example}</p>
+          <CodeBlock code={sections.sdks.exampleCode} />
         </>
       ),
     },
     {
-      id: "testing",
-      title: "Testing & Sandbox",
+      id: sections.testing.id,
+      title: sections.testing.title,
       content: (
         <>
-          <p>Use sandbox keys for testing:</p>
-          <CodeBlock code={`sk_test_51M...`} />
-          <p className="mt-4">Example usage:</p>
-          <CodeBlock
-            code={`import FlowPay from 'flowpay-sdk';
-const client = new FlowPay('sk_test_51M...');
-await client.createPayment({ amount: 2000, currency: 'USD' });`}
-          />
+          <p>{sections.testing.description}</p>
+          <CodeBlock code={sections.testing.sandboxCode} />
+          <p className="mt-4">{sections.testing.example}</p>
+          <CodeBlock code={sections.testing.exampleCode} />
         </>
       ),
     },
     {
-      id: "errors",
-      title: "Error Handling",
+      id: sections.errors.id,
+      title: sections.errors.title,
       content: (
         <>
-          <p>Example error response:</p>
-          <CodeBlock
-            code={`{
-  "error": {
-    "code": "invalid_request",
-    "message": "Missing required parameter"
-  }
-}`}
-          />
+          <p>{sections.errors.description}</p>
+          <CodeBlock code={sections.errors.code} />
         </>
       ),
     },
     {
-      id: "compliance",
-      title: "Compliance & Security",
+      id: sections.compliance.id,
+      title: sections.compliance.title,
       content: (
         <>
-          <p>
-            FlowPay is <strong>PCI DSS Level 1 compliant</strong> and all
-            communication is protected with <strong>TLS 1.2+ encryption</strong>
-            .
-          </p>
-          <p>
-            Sensitive data such as cardholder information is{" "}
-            <strong>tokenized</strong> and never stored in plain text. We follow{" "}
-            <strong>industry best practices</strong> for key management and
-            encryption at rest.
-          </p>
-          <p>
-            Our systems are regularly <strong>penetration tested</strong> and{" "}
-            <strong> vulnerability scanned</strong> to ensure ongoing security.
-          </p>
-          <p>
-            Access to customer data is restricted via{" "}
-            <strong>role-based access controls (RBAC)</strong>,{" "}
-            <strong>MFA</strong>, and continuous monitoring.
-          </p>
-          <p>
-            FlowPay also complies with <strong>GDPR</strong> and{" "}
-            <strong>CCPA</strong> standards, ensuring customer data privacy and
-            transparency.
-          </p>
+          {sections.compliance.paragraphs.map((text, i) => (
+            <p key={i} className="mb-3">
+              {text}
+            </p>
+          ))}
         </>
       ),
     },
     {
-      id: "ui-components",
-      title: "UI Components",
+      id: sections.uiComponents.id,
+      title: sections.uiComponents.title,
       content: (
         <>
-          <p>Embed FlowPay’s payment form:</p>
-          <CodeBlock
-            code={`<iframe src="https://checkout.flowpay.com" width="400" height="600"></iframe>`}
-          />
+          <p>{sections.uiComponents.description}</p>
+          <CodeBlock code={sections.uiComponents.code} />
         </>
       ),
     },
     {
-      id: "faqs",
-      title: "FAQs",
+      id: sections.faqs.id,
+      title: sections.faqs.title,
       content: (
         <>
-          <p>
-            <strong>Q:</strong> How do I refund a payment?
-            <br />
-            <strong>A:</strong> Use the Refund API:
-          </p>
-          <CodeBlock code={`POST /v1/refunds`} />
-          <p className="mt-4">
-            <strong>Q:</strong> What currencies are supported?
-            <br />
-            <strong>A:</strong> FlowPay supports over 100 currencies.
-          </p>
-          <CodeBlock code={`GET /v1/currencies`} />
-          <p className="mt-4">
-            <strong>Q:</strong> What payment methods are available?
-            <br />
-            <strong>A:</strong> FlowPay supports over 20 payment methods.
-          </p>
-          <CodeBlock code={`GET /v1/payment-methods`} />
-          <p className="mt-4">
-            <strong>Q:</strong> How do I handle disputes?
-            <br />
-            <strong>A:</strong> Use the Disputes API:
-          </p>
-          <CodeBlock code={`POST /v1/disputes`} />
+          {sections.faqs.questions.map((faq, i) => (
+            <div key={i} className="mt-4">
+              <p>
+                <strong>Q:</strong> {faq.q}
+                <br />
+                <strong>A:</strong> {faq.a}
+              </p>
+              <CodeBlock code={faq.code} />
+            </div>
+          ))}
         </>
       ),
     },
   ];
 
-  const [active, setActive] = useState(sections[0].id);
+  const [active, setActive] = useState(sectionList[0].id);
 
   return (
     <div className="bg-slate-900 text-white min-h-screen flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-slate-800 p-4 border-r border-slate-700 ">
-        <h2 className="text-lg font-bold mb-4 mt-20">FlowPay Docs</h2>
+      <aside className="w-64 bg-slate-800 p-4 border-r border-slate-700">
+        <h2 className="text-lg font-bold mb-4 mt-20">{title}</h2>
         <nav>
-          {sections.map((s) => (
+          {sectionList.map((s) => (
             <button
               key={s.id}
               className={`block text-left w-full p-2 rounded-md mb-1 ${
@@ -254,9 +167,9 @@ await client.createPayment({ amount: 2000, currency: 'USD' });`}
       {/* Main Content */}
       <main className="flex-1 p-6 overflow-y-auto">
         <h1 className="text-2xl font-bold mb-4 mt-18">
-          {sections.find((s) => s.id === active)?.title}
+          {sectionList.find((s) => s.id === active)?.title}
         </h1>
-        <div>{sections.find((s) => s.id === active)?.content}</div>
+        <div>{sectionList.find((s) => s.id === active)?.content}</div>
       </main>
     </div>
   );
