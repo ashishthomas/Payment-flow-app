@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Smartphone, Download, QrCode } from "lucide-react";
+import { Smartphone, Download } from "lucide-react";
+import QRCodeGenerator from "./QRCodeGenerator";
 
 const CallToAction = () => {
   return (
@@ -117,11 +118,15 @@ const CallToAction = () => {
           >
             <motion.div
               whileHover={{ scale: 1.05, rotate: 2 }}
-              className="inline-block bg-white p-8 rounded-3xl mb-8 shadow-2xl"
+              className="inline-block mb-8"
             >
-              <div className="w-48 h-48 bg-slate-900 rounded-2xl flex items-center justify-center">
-                <QrCode size={120} className="text-white" />
-              </div>
+              <QRCodeGenerator
+                value="https://yourappdomain.com/download"
+                size={180}
+                label="Scan to download FlowPay"
+                bgColor="#ffffff"
+                fgColor="#111827"
+              />
             </motion.div>
 
             <div className="text-white mb-4">
