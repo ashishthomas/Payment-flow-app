@@ -14,6 +14,7 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { authUtils } from "../utils/auth";
+import { REGISTER_TEXT } from "../constants/Register-text-constants"; // ✅ import constants
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -21,12 +22,7 @@ const RegisterPage = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const benefits = [
-    "Multi-currency account with real exchange rates",
-    "Send money to 80+ countries",
-    "FlowPay debit card for worldwide spending",
-    "No monthly fees or minimum balance",
-  ];
+  const benefits = REGISTER_TEXT.benefits;
 
   const formik = useFormik({
     initialValues: {
@@ -38,18 +34,24 @@ const RegisterPage = () => {
       agreedToTerms: false,
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().required("First name is required"),
-      lastName: Yup.string().required("Last name is required"),
+      firstName: Yup.string().required(REGISTER_TEXT.validation.firstName),
+      lastName: Yup.string().required(REGISTER_TEXT.validation.lastName),
       email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is required"),
+        .email(REGISTER_TEXT.validation.email.invalid)
+        .required(REGISTER_TEXT.validation.email.required),
       password: Yup.string()
-        .min(6, "Password must be at least 6 characters")
-        .required("Password is required"),
+        .min(6, REGISTER_TEXT.validation.password.min)
+        .required(REGISTER_TEXT.validation.password.required),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password")], "Passwords must match")
-        .required("Confirm your password"),
-      agreedToTerms: Yup.boolean().oneOf([true], "You must agree to the terms"),
+        .oneOf(
+          [Yup.ref("password")],
+          REGISTER_TEXT.validation.confirmPassword.mismatch
+        )
+        .required(REGISTER_TEXT.validation.confirmPassword.required),
+      agreedToTerms: Yup.boolean().oneOf(
+        [true],
+        REGISTER_TEXT.validation.agreedToTerms
+      ),
     }),
     onSubmit: async (values) => {
       setIsLoading(true);
@@ -68,12 +70,12 @@ const RegisterPage = () => {
           });
 
           if (loginResult.success) {
-            toast.success(`Welcome to FlowPay, ${result.user.firstName}! 🎉`);
+            toast.success(REGISTER_TEXT.toast.welcome(result.user.firstName));
             setTimeout(() => {
               navigate("/");
             }, 1500);
           } else {
-            toast.success("Registration successful! Please log in.");
+            toast.success(REGISTER_TEXT.toast.registrationSuccess);
             navigate("/login");
           }
         } else {
@@ -81,7 +83,7 @@ const RegisterPage = () => {
         }
       } catch (err) {
         console.error(err);
-        toast.error("Something went wrong. Please try again.");
+        toast.error(REGISTER_TEXT.toast.error);
       } finally {
         setIsLoading(false);
       }
@@ -99,13 +101,16 @@ const RegisterPage = () => {
           className="flex flex-col justify-center"
         >
           <h1 className="text-4xl md:text-5xl font-light text-white mb-6">
-            Join <span className="text-lime-400 font-medium">16+ million</span>{" "}
+            {REGISTER_TEXT.heading.title}{" "}
+            <span className="text-lime-400 font-medium">
+              {REGISTER_TEXT.heading.highlight}
+            </span>{" "}
             people
           </h1>
           <p className="text-xl text-slate-400 mb-8">
-            Who trust FlowPay for fast, fair, and transparent international
-            money transfers.
+            {REGISTER_TEXT.heading.subtitle}
           </p>
+
           <div className="space-y-4">
             {benefits.map((benefit, index) => (
               <motion.div
@@ -134,9 +139,9 @@ const RegisterPage = () => {
         >
           <div className="text-center mb-8">
             <h2 className="text-3xl font-semibold text-white mb-2">
-              Create your account
+              {REGISTER_TEXT.form.title}
             </h2>
-            <p className="text-slate-400">Get started in just a few minutes</p>
+            <p className="text-slate-400">{REGISTER_TEXT.form.subtitle}</p>
           </div>
 
           <form onSubmit={formik.handleSubmit} className="space-y-6">
@@ -150,7 +155,7 @@ const RegisterPage = () => {
                 <input
                   type="text"
                   name="firstName"
-                  placeholder="First name"
+                  placeholder={REGISTER_TEXT.form.placeholders.firstName}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.firstName}
@@ -171,7 +176,7 @@ const RegisterPage = () => {
                 <input
                   type="text"
                   name="lastName"
-                  placeholder="Last name"
+                  placeholder={REGISTER_TEXT.form.placeholders.lastName}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.lastName}
@@ -194,7 +199,7 @@ const RegisterPage = () => {
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder={REGISTER_TEXT.form.placeholders.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.email}
@@ -216,7 +221,7 @@ const RegisterPage = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
-                placeholder="Password"
+                placeholder={REGISTER_TEXT.form.placeholders.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.password}
@@ -245,7 +250,7 @@ const RegisterPage = () => {
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
-                placeholder="Confirm password"
+                placeholder={REGISTER_TEXT.form.placeholders.confirmPassword}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 value={formik.values.confirmPassword}
@@ -273,14 +278,17 @@ const RegisterPage = () => {
                 name="agreedToTerms"
                 checked={formik.values.agreedToTerms}
                 onChange={formik.handleChange}
-                className=" appearance-none w-4 h-4 mt-1 border-2 border-slate-500 rounded-md bg-slate-700 checked:bg-lime-400
-                          checked:border-lime-400 checked:hover:bg-lime-300 focus:outline-none focus:ring-2 focus:ring-lime-400 
-                            focus:ring-offset-1 transition-color cursor-pointer"
+                className="appearance-none w-4 h-4 mt-1 border-2 border-slate-500 rounded-md bg-slate-700 checked:bg-lime-400 checked:border-lime-400 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:ring-offset-1 cursor-pointer"
               />
               <label className="text-slate-400 text-sm">
-                I agree to the{" "}
-                <span className="text-lime-400">Terms of Service</span> and{" "}
-                <span className="text-lime-400">Privacy Policy</span>
+                {REGISTER_TEXT.form.checkbox.label}{" "}
+                <span className="text-lime-400">
+                  {REGISTER_TEXT.form.checkbox.terms}
+                </span>{" "}
+                {REGISTER_TEXT.form.checkbox.and}{" "}
+                <span className="text-lime-400">
+                  {REGISTER_TEXT.form.checkbox.privacy}
+                </span>
               </label>
             </div>
             {formik.touched.agreedToTerms && formik.errors.agreedToTerms && (
@@ -300,11 +308,11 @@ const RegisterPage = () => {
               {isLoading ? (
                 <>
                   <div className="w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" />
-                  <span>Creating account...</span>
+                  <span>{REGISTER_TEXT.form.button.loading}</span>
                 </>
               ) : (
                 <>
-                  <span>Create account</span>
+                  <span>{REGISTER_TEXT.form.button.create}</span>
                   <ArrowRight size={20} />
                 </>
               )}
@@ -313,9 +321,9 @@ const RegisterPage = () => {
 
           <div className="mt-8 text-center">
             <p className="text-slate-400">
-              Already have an account?{" "}
+              {REGISTER_TEXT.form.footer.existing}{" "}
               <Link to="/login" className="text-lime-400 hover:text-lime-300">
-                Sign in
+                {REGISTER_TEXT.form.footer.signIn}
               </Link>
             </p>
           </div>

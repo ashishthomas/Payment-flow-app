@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Send, TrendingUp, Plus } from "lucide-react";
-import { useNavigate } from "react-router-dom"; // For navigation
+import { useNavigate } from "react-router-dom";
 import { recentTransactions } from "../data/DashboardTransacrion";
 
 const DashboardPage = () => {
