@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Send, TrendingUp, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { recentTransactions } from "../data/DashboardTransacrion";
+import { DASHBOARD_TEXT } from "../constants/Dashboard-text-constants";
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const DashboardPage = () => {
   const handleSendMoney = () => {
     const newTransaction = {
       id: Date.now(),
-      title: "Manual Send Money Entry",
+      title: DASHBOARD_TEXT.MANUAL_TRANSACTION_TITLE,
       amount: "-₹5,000",
       date: new Date().toLocaleDateString("en-IN", {
         day: "2-digit",
@@ -25,13 +26,10 @@ const DashboardPage = () => {
       location: "Bengaluru, India",
     };
 
-    // Get existing transactions from localStorage
     const stored = JSON.parse(localStorage.getItem("transactions") ?? "[]");
     stored.push(newTransaction);
-
-    // Save back to localStorage
     localStorage.setItem("transactions", JSON.stringify(stored));
-    alert("Transaction saved to local storage!");
+    alert(DASHBOARD_TEXT.TRANSACTION_SAVED);
   };
 
   const handleAddFunds = () => {
@@ -49,11 +47,11 @@ const DashboardPage = () => {
           className="text-center mt-4"
         >
           <h1 className="text-4xl font-light mb-2">
-            Welcome back,{" "}
+            {DASHBOARD_TEXT.WELCOME_MESSAGE}{" "}
             <span className="text-lime-400 font-medium">{user.name}</span>
           </h1>
           <p className="text-slate-400 text-sm">
-            Here's your financial activity overview
+            {DASHBOARD_TEXT.OVERVIEW_SUBTEXT}
           </p>
         </motion.div>
 
@@ -65,7 +63,9 @@ const DashboardPage = () => {
           className="bg-slate-800/40 backdrop-blur-md border border-slate-700/50 p-8 rounded-3xl grid grid-cols-1 md:grid-cols-3 gap-8 items-center"
         >
           <div>
-            <p className="text-slate-400 mb-2">Available Balance</p>
+            <p className="text-slate-400 mb-2">
+              {DASHBOARD_TEXT.AVAILABLE_BALANCE}
+            </p>
             <h2 className="text-4xl font-semibold text-lime-400">
               {user.balance}
             </h2>
@@ -77,20 +77,20 @@ const DashboardPage = () => {
               onClick={handleSendMoney}
               className="bg-lime-400 hover:bg-lime-300 text-slate-900 px-5 py-3 rounded-full font-medium flex items-center gap-2 transition"
             >
-              <Send size={18} /> Send Money
+              <Send size={18} /> {DASHBOARD_TEXT.SEND_MONEY}
             </button>
             <button
               onClick={handleAddFunds}
               className="border border-slate-600 hover:bg-slate-800 px-5 py-3 rounded-full font-medium flex items-center gap-2 transition"
             >
-              <Plus size={18} /> Add Funds
+              <Plus size={18} /> {DASHBOARD_TEXT.ADD_FUNDS}
             </button>
           </div>
 
           <div className="flex items-center justify-end space-x-4 text-right md:block">
             <TrendingUp size={18} className="text-lime-400" />
             <p className="text-sm text-slate-400">
-              +12% more activity this week
+              {DASHBOARD_TEXT.ACTIVITY_GROWTH}
             </p>
           </div>
         </motion.div>
@@ -101,7 +101,9 @@ const DashboardPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
-          <h3 className="text-2xl font-medium mb-6">Recent Transactions</h3>
+          <h3 className="text-2xl font-medium mb-6">
+            {DASHBOARD_TEXT.RECENT_TRANSACTIONS}
+          </h3>
           <div className="bg-slate-800/30 border border-slate-700/40 rounded-2xl divide-y divide-slate-700">
             {recentTransactions.map((tx) => (
               <div
