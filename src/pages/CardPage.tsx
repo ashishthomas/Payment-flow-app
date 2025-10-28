@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CardHeader from "../pages/CardComponents/CardHeader";
 import CardPreview from "../pages/CardComponents/CardPreview";
 import CardTypeSelector from "../pages/CardComponents/CardTypeSelector";
