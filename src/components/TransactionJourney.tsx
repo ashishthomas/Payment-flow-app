@@ -60,7 +60,7 @@ const TransactionJourney = () => {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {journeySteps.map((step, index) => (
               <motion.div
-                key={index}
+                key={`${step.action}-${step.location}-${index}`} // ✅ Unique & stable key
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}

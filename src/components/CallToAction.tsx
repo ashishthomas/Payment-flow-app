@@ -95,7 +95,7 @@ const CallToAction = () => {
                   "24/7 customer support",
                 ].map((feature, index) => (
                   <motion.div
-                    key={index}
+                    key={feature}
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
