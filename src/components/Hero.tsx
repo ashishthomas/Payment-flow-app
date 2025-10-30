@@ -29,8 +29,12 @@ const Hero = () => {
         className="absolute top-40 md:top-32 right-8 bg-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-4 text-center"
       >
         <div className="flex items-center justify-center mb-2">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} size={16} className="text-lime-400 fill-current" />
+          {[1, 2, 3, 4, 5].map((n) => (
+            <Star
+              key={`star-${n}`}
+              size={16}
+              className="text-lime-400 fill-current"
+            />
           ))}
         </div>
         <div className="text-white font-semibold text-lg">4.8</div>
@@ -45,8 +49,8 @@ const Hero = () => {
         className="absolute top-60 md:top-40 left-8 bg-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-4 text-center"
       >
         <div className="flex items-center justify-center mb-2">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} size={16} className="text-lime-400 fill-current" />
+          {[1, 2, 3, 4, 5].map((n) => (
+            <Star key={`star-${n}`} size={16} className="text-lime-400 fill-current" />
           ))}
         </div>
         <div className="text-white font-semibold text-lg">4.8</div>
