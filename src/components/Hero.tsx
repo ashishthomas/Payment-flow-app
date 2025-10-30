@@ -91,19 +91,6 @@ const Hero = () => {
               Get started
             </motion.button>
           </Link>
-          {/* <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="border border-slate-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-slate-800 transition-colors"
-            onClick={() => {
-              const element = document.querySelector("#how-it-works");
-              if (element) {
-                element.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
-          >
-            See how it works
-          </motion.button> */}
 
           <Link to="/PaymentFlowPage">
             <motion.button
