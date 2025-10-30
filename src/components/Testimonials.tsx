@@ -1,48 +1,6 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
-
-const testimonials = [
-  {
-    name: "Sarah Chen",
-    role: "Digital Nomad",
-    country: "Singapore",
-    rating: 5,
-    text: "FlowPay has completely changed how I manage money while traveling. No more worrying about exchange rates or hidden fees.",
-    avatar: "👩‍💻",
-  },
-  {
-    name: "Marcus Johnson",
-    role: "Small Business Owner",
-    country: "Canada",
-    rating: 5,
-    text: "Paying international suppliers has never been easier. FlowPay saves us thousands in bank fees every year.",
-    avatar: "👨‍💼",
-  },
-  {
-    name: "Priya Patel",
-    role: "Software Engineer",
-    country: "India",
-    rating: 5,
-    text: "Finally, a financial service that treats customers fairly. Transparent pricing and excellent service.",
-    avatar: "👩‍💻",
-  },
-  {
-    name: "James Wilson",
-    role: "Freelance Designer",
-    country: "UK",
-    rating: 5,
-    text: "Getting paid by international clients is seamless now. The multi-currency account is a game-changer.",
-    avatar: "👨‍🎨",
-  },
-  {
-    name: "Maria Rodriguez",
-    role: "E-commerce Entrepreneur",
-    country: "Spain",
-    rating: 5,
-    text: "Managing payments in multiple currencies used to be a nightmare. FlowPay made it simple and affordable.",
-    avatar: "👩‍💼",
-  },
-];
+import { testimonials } from "../data/TestimonialsData";
 
 const Testimonials = () => {
   return (
@@ -75,34 +33,36 @@ const Testimonials = () => {
           >
             {[...testimonials, ...testimonials].map((testimonial, index) => (
               <motion.div
-                key={index}
+                key={`${testimonial.name}-${index}`}
                 whileHover={{ scale: 1.05 }}
                 className="flex-shrink-0 w-80 bg-slate-900/50 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-6"
               >
                 <div className="flex items-center space-x-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={16}
-                      className="text-lime-400 fill-current"
-                    />
-                  ))}
+                  {Array.from({ length: testimonial?.rating ?? 0 }).map(
+                    (_, i) => (
+                      <Star
+                        key={`star-${testimonial.name}-${i}`}
+                        size={16}
+                        className="text-lime-400 fill-current"
+                      />
+                    )
+                  )}
                 </div>
 
                 <Quote className="text-slate-600 mb-4" size={24} />
 
                 <p className="text-slate-300 mb-6 leading-relaxed">
-                  "{testimonial.text}"
+                  "{testimonial?.text}"
                 </p>
 
                 <div className="flex items-center space-x-3">
-                  <div className="text-3xl">{testimonial.avatar}</div>
+                  <div className="text-3xl">{testimonial?.avatar}</div>
                   <div>
                     <div className="text-white font-semibold">
-                      {testimonial.name}
+                      {testimonial?.name}
                     </div>
                     <div className="text-slate-400 text-sm">
-                      {testimonial.role} • {testimonial.country}
+                      {testimonial?.role} • {testimonial?.country}
                     </div>
                   </div>
                 </div>
@@ -120,9 +80,15 @@ const Testimonials = () => {
           <div className="inline-flex items-center space-x-6 bg-slate-900/50 backdrop-blur-xl border border-slate-700/50 rounded-full px-8 py-4">
             <div className="flex items-center space-x-2">
               <div className="flex items-center space-x-1">
-                {[...Array(5)].map((_, i) => (
+                {[
+                  "bottom-star-1",
+                  "bottom-star-2",
+                  "bottom-star-3",
+                  "bottom-star-4",
+                  "bottom-star-5",
+                ].map((id) => (
                   <Star
-                    key={i}
+                    key={id}
                     size={16}
                     className="text-lime-400 fill-current"
                   />
