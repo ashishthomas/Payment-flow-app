@@ -282,13 +282,19 @@ const RegisterPage = () => {
               />
               <label className="text-slate-400 text-sm">
                 {REGISTER_TEXT.form.checkbox.label}{" "}
-                <span className="text-lime-400">
+                <Link
+                  to="/terms"
+                  className="text-lime-400 hover:text-blue-300 transition-colors"
+                >
                   {REGISTER_TEXT.form.checkbox.terms}
-                </span>{" "}
+                </Link>{" "}
                 {REGISTER_TEXT.form.checkbox.and}{" "}
-                <span className="text-lime-400">
+                <Link
+                  to="/privacy"
+                  className="text-lime-400 hover:text-blue-300 transition-colors"
+                >
                   {REGISTER_TEXT.form.checkbox.privacy}
-                </span>
+                </Link>
               </label>
             </div>
             {formik.touched.agreedToTerms && formik.errors.agreedToTerms && (

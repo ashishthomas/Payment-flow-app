@@ -17,23 +17,26 @@ const CallToAction = lazy(() => import("./components/CallToAction"));
 const PersonalPage = lazy(() => import("./pages/Header/PersonalPage"));
 const BusinessPage = lazy(() => import("./pages/Header/BusinessPage"));
 const PlatformPage = lazy(() => import("./pages/Header/PlatformPage"));
-const DocsPage = lazy(() => import("./pages/DocsPage"));
 const HelpPage = lazy(() => import("./pages/Header/HelpPage"));
+
+const AboutPage = lazy(() => import("./pages/footer/AboutPage"));
+const CareersPage = lazy(() => import("./pages/footer/CareersPage"));
+const CookiesPage = lazy(() => import("./pages/footer/CookiesPage"));
+const InvestorPage = lazy(() => import("./pages/footer/InvestorPage"));
+const MissionPage = lazy(() => import("./pages/footer/MissionPage"));
+const NewsPage = lazy(() => import("./pages/footer/NewsPage"));
+const PrivacyPage = lazy(() => import("./pages/footer/PrivacyPage"));
+const ReceiveMoneyPage = lazy(() => import("./pages/footer/ReceiveMoneyPage"));
+const SendMoneyPage = lazy(() => import("./pages/footer/SendMoneyPage"));
+const TermsPage = lazy(() => import("./pages/footer/TermsPage"));
+
+const DocsPage = lazy(() => import("./pages/DocsPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const ForgotPasswordPage = lazy(() => import("./pages/ForgotPassword"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 const Journey = lazy(() => import("./pages/Journey"));
-const SendMoneyPage = lazy(() => import("./pages/footer/SendMoneyPage"));
-const ReceiveMoneyPage = lazy(() => import("./pages/footer/ReceiveMoneyPage"));
 const CardPage = lazy(() => import("./pages/CardPage"));
-const AboutPage = lazy(() => import("./pages/footer/AboutPage"));
-const CareersPage = lazy(() => import("./pages/footer/CareersPage"));
-const NewsPage = lazy(() => import("./pages/footer/NewsPage"));
-const MissionPage = lazy(() => import("./pages/footer/MissionPage"));
-const InvestorPage = lazy(() => import("./pages/footer/InvestorPage"));
-const PrivacyPage = lazy(() => import("./pages/footer/PrivacyPage"));
-const TermsPage = lazy(() => import("./pages/footer/TermsPage"));
-const CookiesPage = lazy(() => import("./pages/footer/CookiesPage"));
+
 const ChatPage = lazy(() => import("./pages/ChatPage"));
 const CardDetails = lazy(() => import("./pages/CardDetails"));
 const PaymentFlowPage = lazy(() => import("./pages/PaymentFlowPage"));
@@ -41,7 +44,6 @@ const StartedPaymentPage = lazy(() => import("./pages/StartedPaymentPage"));
 const DashboardPage = lazy(() => import("./pages/DashboardPage"));
 const FundsDetail = lazy(() => import("./pages/FundsDetail"));
 
-// HomePage as inline component
 const HomePage = () => (
   <>
     <Hero />
