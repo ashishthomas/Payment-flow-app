@@ -21,7 +21,7 @@ const FeeCalculator = () => {
       savings: bankFee - flowPayFee,
       rateDifference: (exchangeRate * 0.97).toFixed(4),
     };
-  }, [amount, exchangeRate]);
+  }, [amount, exchangeRate, bankFee, flowPayFee]);
 
   const recipientValue = useMemo(
     () => (amount * exchangeRate).toFixed(2),
