@@ -25,7 +25,7 @@ const SecurityStats = () => (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
       {stats.map((stat, i) => (
         <motion.div
-          key={i}
+          key={stat.label}
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: i * 0.1 }}

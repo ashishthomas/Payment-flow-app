@@ -47,7 +47,7 @@ const Navbar = () => {
       setCurrentUser(authUtils.getCurrentUser());
     };
 
-    window.addEventListener("storage", handleStorageChange);
+    globalThis.addEventListener("storage", handleStorageChange);
 
     // Also check periodically for changes within the same tab
     const interval = setInterval(() => {
@@ -58,7 +58,7 @@ const Navbar = () => {
     }, 1000);
 
     return () => {
-      window.removeEventListener("storage", handleStorageChange);
+      globalThis.removeEventListener("storage", handleStorageChange);
       clearInterval(interval);
     };
   }, [currentUser]);
@@ -161,7 +161,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="bg-lime-400 text-slate-900 px-4 py-2 rounded-full text-sm font-medium hover:bg-lime-300 transition-colors whitespace-nowrap"
-              onClick={() => (window.location.href = "/register")}
+              onClick={() => (globalThis.location.href = "/register")}
             >
               Register
             </motion.button>

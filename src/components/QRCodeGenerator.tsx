@@ -30,7 +30,7 @@ const QRCodeGenerator: React.FC<QRCodeGeneratorProps> = ({
       size={size}
       bgColor={bgColor}
       fgColor={fgColor}
-      includeMargin={true}
+      marginSize={10}
       style={{ borderRadius: "1rem" }}
     />
   );

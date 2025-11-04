@@ -31,7 +31,7 @@ const SecuritySection = () => (
       <SecurityHeader />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
         {features.map((f, i) => (
-          <SecurityFeatureCard key={i} {...f} index={i} />
+          <SecurityFeatureCard key={f.title} {...f} index={i} />
         ))}
       </div>
       <SecurityStats />
