@@ -86,11 +86,9 @@ console.log('Payment created:', payment.id);`;
                 "Get your API keys",
                 "Make your first API call",
                 "Go live with real payments",
-              ].map((step, index) => (
-                <div key={index} className="flex items-center space-x-4">
-                  <div className="w-8 h-8 bg-lime-400 text-slate-900 rounded-full flex items-center justify-center font-semibold text-sm">
-                    {index + 1}
-                  </div>
+              ].map((step) => (
+                <div key={step} className="flex items-center space-x-4">
+                  <div className="w-8 h-8 bg-lime-400 text-slate-900 rounded-full flex items-center justify-center font-semibold text-sm"></div>
                   <span className="text-slate-300">{step}</span>
                 </div>
               ))}
@@ -116,12 +114,12 @@ console.log('Payment created:', payment.id);`;
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-          {apiFeatures.map((feature, index) => (
+          {apiFeatures.map((feature) => (
             <motion.div
-              key={index}
+              key={feature.title}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.6 }}
               className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8"
             >
               <div className="flex items-center space-x-4 mb-6">
@@ -138,8 +136,8 @@ console.log('Payment created:', payment.id);`;
               </p>
 
               <ul className="space-y-3">
-                {feature.features.map((item, idx) => (
-                  <li key={idx} className="flex items-center space-x-3">
+                {feature.features.map((item) => (
+                  <li key={item} className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-lime-400 rounded-full" />
                     <span className="text-slate-300">{item}</span>
                   </li>

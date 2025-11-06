@@ -17,7 +17,7 @@ const HelpPage = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
-  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [expandedFaq, setExpandedFaq] = useState<string | null>(null);
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -94,9 +94,9 @@ const HelpPage = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
         >
-          {contactOptions.map((option, index) => (
+          {contactOptions.map((option) => (
             <motion.div
-              key={index}
+              key={option.title} // ✅ FIX: unique key instead of index
               whileHover={{ y: -5 }}
               className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-6 text-center cursor-pointer hover:bg-slate-800/70 transition-all duration-300"
               onClick={() => {
@@ -135,43 +135,49 @@ const HelpPage = () => {
           </h2>
 
           <div className="space-y-4">
-            {filteredFaqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl overflow-hidden"
-              >
-                <button
-                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-slate-800/70 transition-colors"
-                  onClick={() =>
-                    setExpandedFaq(expandedFaq === index ? null : index)
-                  }
-                >
-                  <span className="text-white font-medium">{faq.question}</span>
-                  {expandedFaq === index ? (
-                    <ChevronDown className="text-lime-400" size={20} />
-                  ) : (
-                    <ChevronRight className="text-slate-400" size={20} />
-                  )}
-                </button>
+            {filteredFaqs.map((faq) => {
+              const faqKey = faq.question; // ✅ stable key
 
-                {expandedFaq === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="px-6 pb-4"
+              return (
+                <motion.div
+                  key={faqKey} // ✅ no index, no id
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl overflow-hidden"
+                >
+                  <button
+                    className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-slate-800/70 transition-colors"
+                    onClick={() =>
+                      setExpandedFaq(expandedFaq === faqKey ? null : faqKey)
+                    } // ✅ updated toggle support
                   >
-                    <p className="text-slate-400 leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </motion.div>
-                )}
-              </motion.div>
-            ))}
+                    <span className="text-white font-medium">
+                      {faq.question}
+                    </span>
+                    {expandedFaq === faqKey ? (
+                      <ChevronDown className="text-lime-400" size={20} />
+                    ) : (
+                      <ChevronRight className="text-slate-400" size={20} />
+                    )}
+                  </button>
+
+                  {expandedFaq === faqKey && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="px-6 pb-4"
+                    >
+                      <p className="text-slate-400 leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
 
           {filteredFaqs.length === 0 && searchQuery && (

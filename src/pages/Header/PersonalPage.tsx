@@ -42,7 +42,7 @@ const PersonalPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
           {features.map((feature, index) => (
             <motion.div
-              key={index}
+              key={feature.title}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
@@ -62,8 +62,8 @@ const PersonalPage = () => {
               </p>
 
               <ul className="space-y-3">
-                {feature.benefits.map((benefit, idx) => (
-                  <li key={idx} className="flex items-center space-x-3">
+                {feature.benefits.map((benefit) => (
+                  <li key={benefit} className="flex items-center space-x-3">
                     <div className="w-2 h-2 bg-lime-400 rounded-full" />
                     <span className="text-slate-300">{benefit}</span>
                   </li>
