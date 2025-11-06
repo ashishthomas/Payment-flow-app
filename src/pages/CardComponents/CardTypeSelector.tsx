@@ -13,7 +13,7 @@ interface Props {
 export default function CardTypeSelector({
   selectedCardType,
   onSelect,
-}: Props) {
+}: Readonly<Props>) {
   const cardTypes = [
     { id: "personal", icon: CreditCard, label: "Personal" },
     { id: "travel", icon: Plane, label: "Travel" },
@@ -61,12 +61,12 @@ export default function CardTypeSelector({
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {cardFeatures[selectedCardType].map((feature, index) => (
+          {cardFeatures[selectedCardType].map((feature) => (
             <motion.div
-              key={index}
+              key={feature}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5 }}
               className="flex items-center space-x-3"
             >
               <CheckCircle className="text-lime-400 flex-shrink-0" size={20} />

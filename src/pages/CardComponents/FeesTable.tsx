@@ -28,8 +28,8 @@ export default function FeesTable() {
             </tr>
           </thead>
           <tbody>
-            {fees.map((fee, i) => (
-              <tr key={i} className="border-b border-slate-700/50">
+            {fees.map((fee) => (
+              <tr key={fee.service} className="border-b border-slate-700/50">
                 <td className="py-4 text-slate-300">{fee.service}</td>
                 <td className="py-4 text-lime-400 font-semibold">{fee.cost}</td>
                 <td className="py-4 text-slate-400 text-sm">

@@ -36,8 +36,8 @@ export default function ATMSection() {
         </p>
 
         <div className="space-y-4">
-          {features.map((feature, index) => (
-            <div key={index} className="flex items-center space-x-3">
+          {features.map((feature) => (
+            <div key={feature} className="flex items-center space-x-3">
               <MapPin className="text-lime-400 flex-shrink-0" size={20} />
               <span className="text-slate-300">{feature}</span>
             </div>
@@ -50,8 +50,11 @@ export default function ATMSection() {
           ATM Network Coverage
         </h3>
         <div className="grid grid-cols-2 gap-4">
-          {locations.map((loc, i) => (
-            <div key={i} className="text-center p-4 bg-slate-700/50 rounded-xl">
+          {locations.map((loc) => (
+            <div
+              key={loc.country}
+              className="text-center p-4 bg-slate-700/50 rounded-xl"
+            >
               <div className="text-lime-400 font-bold text-lg">{loc.atms}</div>
               <div className="text-slate-300 text-sm">{loc.country}</div>
             </div>
