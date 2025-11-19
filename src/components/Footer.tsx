@@ -11,7 +11,8 @@ const socialLinks = [
     label: "Facebook",
   },
   {
-m,     url: "https://instagram.com/yourprofile",
+    icon: Instagram,
+    url: "https://instagram.com/yourprofile",
     label: "Instagram",
   },
   {
