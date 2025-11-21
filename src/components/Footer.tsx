@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import { memo } from "react";
 
 const socialLinks = [
-  { icon: Twitter, url: "https://twitter.com/yourprofile", label: "Twitter" },
+  {
+    icon: Twitter,
+    url: "https://twitter.com/yourprofile",
+    label: "Twitter",
+  },
   {
     icon: Facebook,
     url: "https://facebook.com/yourprofile",
@@ -65,7 +69,6 @@ const Logo = memo(() => (
       width="40"
       height="40"
       viewBox="0 0 24 24"
-      role="img"
       aria-hidden="true"
     >
       <path
@@ -159,7 +162,7 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Footer legal links */}
+            {/* Legal links */}
             <div className="flex flex-wrap justify-center md:justify-end items-center gap-x-6 gap-y-2 text-slate-400 text-sm">
               <Link
                 to="/privacy"
