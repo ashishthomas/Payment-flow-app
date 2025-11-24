@@ -2,36 +2,10 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MapPin, ArrowRight, CheckCircle } from "lucide-react";
 
-const journeySteps = [
-  {
-    location: "Delhi, India",
-    action: "Book taxi ride",
-    amount: "₹250",
-    flag: "🇮🇳",
-    icon: "🚕",
-  },
-  {
-    location: "London, UK",
-    action: "Coffee & pastry",
-    amount: "£8.50",
-    flag: "🇬🇧",
-    icon: "☕",
-  },
-  {
-    location: "New York, USA",
-    action: "Metro card top-up",
-    amount: "$25.00",
-    flag: "🇺🇸",
-    icon: "🚇",
-  },
-  {
-    location: "Tokyo, Japan",
-    action: "Dinner for two",
-    amount: "¥4,500",
-    flag: "🇯🇵",
-    icon: "🍜",
-  },
-];
+import {
+  journeySteps,
+  transactionJourneyText,
+} from "../data/TransactionJourneyData";
 
 const TransactionJourney = () => {
   return (
@@ -44,12 +18,14 @@ const TransactionJourney = () => {
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-6xl font-light text-white mb-6">
-            One card,{" "}
-            <span className="text-lime-400 font-medium">everywhere</span>
+            {transactionJourneyText.titlePart1}{" "}
+            <span className="text-lime-400 font-medium">
+              {transactionJourneyText.titleHighlight}
+            </span>
           </h2>
+
           <p className="text-xl text-slate-400 max-w-3xl mx-auto">
-            Spend like a local in 175+ countries. Your FlowPay card
-            automatically converts at the real exchange rate.
+            {transactionJourneyText.subtitle}
           </p>
         </motion.div>
 
@@ -60,7 +36,7 @@ const TransactionJourney = () => {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {journeySteps.map((step, index) => (
               <motion.div
-                key={`${step.action}-${step.location}-${index}`} // ✅ Unique & stable key
+                key={`${step.action}-${step.location}-${index}`}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
@@ -93,7 +69,9 @@ const TransactionJourney = () => {
 
                   <div className="flex items-center justify-center space-x-2 text-emerald-400">
                     <CheckCircle size={16} />
-                    <span className="text-sm">Paid instantly</span>
+                    <span className="text-sm">
+                      {transactionJourneyText.paidInstantly}
+                    </span>
                   </div>
                 </motion.div>
 
@@ -116,19 +94,20 @@ const TransactionJourney = () => {
         >
           <div className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 max-w-2xl mx-auto">
             <h3 className="text-2xl font-semibold text-white mb-4">
-              Real exchange rates, always
+              {transactionJourneyText.bottomTitle}
             </h3>
+
             <p className="text-slate-400 mb-6">
-              No hidden fees, no inflated exchange rates. What you see is what
-              you get.
+              {transactionJourneyText.bottomDescription}
             </p>
+
             <Link to="/cardDetails">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-lime-400 text-slate-900 px-8 py-4 rounded-full text-lg font-medium hover:bg-lime-300 transition-colors cursor-pointer"
               >
-                Get your FlowPay card
+                {transactionJourneyText.bottomButton}
               </motion.button>
             </Link>
           </div>
