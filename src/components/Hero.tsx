@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
+import { heroText, reviewBadges } from "../data/HeroText";
 
 const Hero = () => {
   return (
@@ -22,41 +23,27 @@ const Hero = () => {
       </div>
 
       {/* Floating Review Badges */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1 }}
-        className="absolute top-40 md:top-32 right-8 bg-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-4 text-center"
-      >
-        <div className="flex items-center justify-center mb-2">
-          {[1, 2, 3, 4, 5].map((n) => (
-            <Star
-              key={`star-${n}`}
-              size={16}
-              className="text-lime-400 fill-current"
-            />
-          ))}
-        </div>
-        <div className="text-white font-semibold text-lg">4.8</div>
-        <div className="text-slate-400 text-sm">App Store</div>
-        <div className="text-slate-500 text-xs">147K reviews</div>
-      </motion.div>
+      {reviewBadges.map((item, i) => (
+        <motion.div
+          key={item.source}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1 + i * 0.2 }}
+          className={`absolute ${
+            i === 0 ? "top-40 md:top-32 right-8" : "top-60 md:top-40 left-8"
+          } bg-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-4 text-center`}
+        >
+          <div className="flex items-center justify-center mb-2">
+            {[1, 2, 3, 4, 5].map((n) => (
+              <Star key={n} size={16} className="text-lime-400 fill-current" />
+            ))}
+          </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2 }}
-        className="absolute top-60 md:top-40 left-8 bg-slate-800/80 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-4 text-center"
-      >
-        <div className="flex items-center justify-center mb-2">
-          {[1, 2, 3, 4, 5].map((n) => (
-            <Star key={`star-${n}`} size={16} className="text-lime-400 fill-current" />
-          ))}
-        </div>
-        <div className="text-white font-semibold text-lg">4.8</div>
-        <div className="text-slate-400 text-sm">Google Play</div>
-        <div className="text-slate-500 text-xs">1.1M reviews</div>
-      </motion.div>
+          <div className="text-white font-semibold text-lg">{item.rating}</div>
+          <div className="text-slate-400 text-sm">{item.source}</div>
+          <div className="text-slate-500 text-xs">{item.reviews}</div>
+        </motion.div>
+      ))}
 
       {/* Main Content */}
       <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
@@ -64,10 +51,13 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-6xl md:text-8xl font-light text-white mb-8 leading-tight mt-20 "
+          className="text-6xl md:text-8xl font-light text-white mb-8 leading-tight mt-20"
         >
-          One account for{" "}
-          <span className="text-lime-400 font-medium">the world's</span> money
+          {heroText.titlePart1}{" "}
+          <span className="text-lime-400 font-medium">
+            {heroText.titleHighlight}
+          </span>{" "}
+          {heroText.titlePart2}
         </motion.h1>
 
         <motion.p
@@ -76,8 +66,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto font-light leading-relaxed"
         >
-          Make your money work worldwide, for less. Send, spend, and receive
-          money internationally at the real exchange rate.
+          {heroText.description}
         </motion.p>
 
         <motion.div
@@ -92,7 +81,7 @@ const Hero = () => {
               whileTap={{ scale: 0.95 }}
               className="bg-lime-400 text-slate-900 px-8 py-4 rounded-full text-lg font-medium hover:bg-lime-300 transition-colors"
             >
-              Get started
+              {heroText.primaryButton}
             </motion.button>
           </Link>
 
@@ -102,7 +91,7 @@ const Hero = () => {
               whileTap={{ scale: 0.95 }}
               className="border border-slate-600 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-slate-800 transition-colors"
             >
-              See how it works
+              {heroText.secondaryButton}
             </motion.button>
           </Link>
         </motion.div>
@@ -113,7 +102,7 @@ const Hero = () => {
           transition={{ delay: 0.8 }}
           className="mt-17 mb-4 text-slate-400 text-sm"
         >
-          Trusted by 16+ million customers worldwide
+          {heroText.trustedBy}
         </motion.div>
       </div>
 

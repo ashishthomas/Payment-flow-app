@@ -42,3 +42,16 @@ export const testimonials = [
     avatar: "👩‍💼",
   },
 ];
+
+
+export const testimonialsText = {
+  titlePart1: "Loved by",
+  titleHighlight: "millions",
+  subtitle:
+    "Don't just take our word for it. See what our customers around the world are saying.",
+
+  bottomRatingValue: "4.8/5",
+  bottomRatingDescription: "Based on 1,247,000+ reviews",
+};
+
+export const bottomRatingStars = [1, 2, 3, 4, 5];

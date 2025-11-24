@@ -1,6 +1,10 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
-import { testimonials } from "../data/TestimonialsData";
+import {
+  testimonials,
+  testimonialsText,
+  bottomRatingStars,
+} from "../data/TestimonialsData";
 
 const Testimonials = () => {
   return (
@@ -13,11 +17,14 @@ const Testimonials = () => {
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-6xl font-light text-white mb-6">
-            Loved by <span className="text-lime-400 font-medium">millions</span>
+            {testimonialsText.titlePart1}{" "}
+            <span className="text-lime-400 font-medium">
+              {" "}
+              {testimonialsText.titleHighlight}
+            </span>
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto">
-            Don't just take our word for it. See what our customers around the
-            world are saying.
+            {testimonialsText.subtitle}
           </p>
         </motion.div>
 
@@ -80,24 +87,22 @@ const Testimonials = () => {
           <div className="inline-flex items-center space-x-6 bg-slate-900/50 backdrop-blur-xl border border-slate-700/50 rounded-full px-8 py-4">
             <div className="flex items-center space-x-2">
               <div className="flex items-center space-x-1">
-                {[
-                  "bottom-star-1",
-                  "bottom-star-2",
-                  "bottom-star-3",
-                  "bottom-star-4",
-                  "bottom-star-5",
-                ].map((id) => (
+                {bottomRatingStars.map((n) => (
                   <Star
-                    key={id}
+                    key={n}
                     size={16}
                     className="text-lime-400 fill-current"
                   />
                 ))}
               </div>
-              <span className="text-white font-semibold">4.8/5</span>
+              <span className="text-white font-semibold">
+                {testimonialsText.bottomRatingValue}
+              </span>
             </div>
             <div className="w-px h-6 bg-slate-600" />
-            <div className="text-slate-400">Based on 1,247,000+ reviews</div>
+            <div className="text-slate-400">
+              {testimonialsText.bottomRatingDescription}
+            </div>
           </div>
         </motion.div>
       </div>
