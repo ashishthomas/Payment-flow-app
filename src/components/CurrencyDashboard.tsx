@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { TrendingUp, ArrowUpRight } from "lucide-react";
-import { currencies } from "../data/currencies";
+import { currencies, currencyDashboardText } from "../data/currencies";
 
 const CurrencyDashboard = () => {
   return (
@@ -14,12 +14,13 @@ const CurrencyDashboard = () => {
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-6xl font-light text-white mb-6">
-            Multi-currency{" "}
-            <span className="text-lime-400 font-medium">balances</span>
+            {currencyDashboardText.heading}{" "}
+            <span className="text-lime-400 font-medium">
+              {currencyDashboardText.highlight}
+            </span>
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto">
-            Hold and manage money in 50+ currencies. Get local bank details in
-            10 countries and spend with your FlowPay card.
+            {currencyDashboardText.description}
           </p>
         </motion.div>
 
@@ -87,7 +88,7 @@ const CurrencyDashboard = () => {
         >
           <Link to="/register">
             <button className="bg-lime-400 text-slate-900 px-8 py-4 rounded-full text-lg font-medium hover:bg-lime-300 transition-colors cursor-pointer">
-              Open multi-currency account
+              {currencyDashboardText.buttonText}
             </button>
           </Link>
         </motion.div>

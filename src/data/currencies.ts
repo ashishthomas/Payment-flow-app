@@ -28,3 +28,14 @@ export const currencies = [
     flag: "🇮🇳",
   },
 ];
+
+
+
+export const currencyDashboardText = {
+  heading: "Multi-currency",
+  highlight: "balances",
+  description:
+    "Hold and manage money in 50+ currencies. Get local bank details in 10 countries and spend with your FlowPay card.",
+  buttonText: "Open multi-currency account",
+};
+
