@@ -1,66 +1,14 @@
 import { motion } from "framer-motion";
-import { Twitter, Facebook, Instagram, Linkedin, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
 import { memo } from "react";
-
-const socialLinks = [
-  {
-    icon: Twitter,
-    url: "https://twitter.com/yourprofile",
-    label: "Twitter",
-  },
-  {
-    icon: Facebook,
-    url: "https://facebook.com/yourprofile",
-    label: "Facebook",
-  },
-  {
-    icon: Instagram,
-    url: "https://instagram.com/yourprofile",
-    label: "Instagram",
-  },
-  {
-    icon: Linkedin,
-    url: "https://linkedin.com/in/yourprofile",
-    label: "LinkedIn",
-  },
-];
-
-const languageOptions = ["English", "Español", "Hindi", "Français"];
-
-const footerLinks = {
-  "Send money": [
-    { label: "Send money online", path: "/send-money" },
-    { label: "Send money to India", path: "/send-money?country=india" },
-    {
-      label: "Send money to Philippines",
-      path: "/send-money?country=philippines",
-    },
-    { label: "Send money to Mexico", path: "/send-money?country=mexico" },
-    { label: "Send money to Pakistan", path: "/send-money?country=pakistan" },
-  ],
-  "Receive money": [
-    { label: "Receive money online", path: "/receive-money" },
-    { label: "Get account details", path: "/receive-money#account-details" },
-    { label: "Multi-currency account", path: "/receive-money#multi-currency" },
-    { label: "Large amount transfers", path: "/receive-money#large-transfers" },
-    { label: "International wire", path: "/receive-money#wire-transfers" },
-  ],
-  "FlowPay card": [
-    { label: "Debit card", path: "/card" },
-    { label: "Card for travel", path: "/card#travel" },
-    { label: "Card for business", path: "/card#business" },
-    { label: "ATM withdrawals", path: "/card#atm" },
-    { label: "Card fees", path: "/card#fees" },
-  ],
-  Company: [
-    { label: "About us", path: "/about" },
-    { label: "Careers", path: "/careers" },
-    { label: "News", path: "/news" },
-    { label: "Mission", path: "/mission" },
-    { label: "Investor relations", path: "/investors" },
-  ],
-};
+import { Globe } from "lucide-react";
+import {
+  socialLinks,
+  languageOptions,
+  footerLinks,
+  legalLinks,
+  footerText,
+} from "../data/FooterData";
 
 const Logo = memo(() => (
   <div className="w-10 h-10" aria-label="FlowPay logo">
@@ -92,12 +40,13 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
               <Logo />
-              <span className="text-white font-semibold text-xl">FlowPay</span>
+              <span className="text-white font-semibold text-xl">
+                {footerText.brandName}
+              </span>
             </div>
 
             <p className="text-slate-400 mb-6 leading-relaxed">
-              Making money without borders the new normal. We're building the
-              best way to move and manage the world's money.
+              {footerText.brandDescription}
             </p>
 
             <div className="flex items-center space-x-4">
@@ -156,29 +105,25 @@ const Footer = () => {
                 </select>
               </div>
 
-              <div className="text-slate-400 text-sm">© 2025 FlowPay</div>
               <div className="text-slate-400 text-sm">
-                Developed by Ashish Thomas
+                {footerText.copyright}
+              </div>
+              <div className="text-slate-400 text-sm">
+                {footerText.developedBy}
               </div>
             </div>
 
             {/* Legal links */}
             <div className="flex flex-wrap justify-center md:justify-end items-center gap-x-6 gap-y-2 text-slate-400 text-sm">
-              <Link
-                to="/privacy"
-                className="hover:text-white transition-colors"
-              >
-                Privacy policy
-              </Link>
-              <Link to="/terms" className="hover:text-white transition-colors">
-                Terms of use
-              </Link>
-              <Link
-                to="/cookies"
-                className="hover:text-white transition-colors"
-              >
-                Cookies
-              </Link>
+              {legalLinks.map((item) => (
+                <Link
+                  key={item.label}
+                  to={item.path}
+                  className="hover:text-white transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
